@@ -1,0 +1,136 @@
+# El vídeo del día de Curiosidades Animadas, en GitHub Actions (gratis en un repo público).
+#
+# Cada día a las 4:30 de Madrid: hace UN short con la skill, lo sube a YouTube ya
+# programado (título, descripción, hashtags y portada) y se apaga.
+# Solo se sube si la generación terminó bien (eso lo decide dia.sh).
+#
+# Secretos del repo (Settings → Secrets and variables → Actions), los crea Rubén:
+#   CLAUDE_CODE_OAUTH_TOKEN, GEMINI_API_KEY, YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN
+#
+# Para lanzarlo a mano: pestaña Actions → «Vídeo del día» → Run workflow.
+
+name: Vídeo del día
+
+on:
+  schedule:
+    # GitHub solo entiende la hora UTC. 4:30 en Madrid es 3:30 UTC en invierno y
+    # 2:30 UTC en verano: se ponen las dos y el primer paso deja pasar solo la buena.
+    - cron: "30 2 * * *"
+    - cron: "30 3 * * *"
+  workflow_dispatch:
+    inputs:
+      idea:
+        description: "Idea del vídeo (vacío = la elige Claude)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write   # para guardar el historial del canal en el repo
+
+concurrency:
+  group: video-del-dia
+  cancel-in-progress: false
+
+jobs:
+  hora:
+    runs-on: ubuntu-latest
+    outputs:
+      toca: ${{ steps.mira.outputs.toca }}
+    steps:
+      - id: mira
+        run: |
+          OFF=$(TZ=Europe/Madrid date +%z)
+          EVENTO="${{ github.event_name }}"
+          RELOJ="${{ github.event.schedule }}"
+          TOCA=no
+          if [ "$EVENTO" != "schedule" ]; then TOCA=si
+          elif [ "$OFF" = "+0100" ] && [ "$RELOJ" = "30 3 * * *" ]; then TOCA=si
+          elif [ "$OFF" = "+0200" ] && [ "$RELOJ" = "30 2 * * *" ]; then TOCA=si
+          fi
+          echo "Madrid $OFF, reloj '$RELOJ', evento $EVENTO -> $TOCA"
+          echo "toca=$TOCA" >> "$GITHUB_OUTPUT"
+
+  video:
+    needs: hora
+    if: needs.hora.outputs.toca == 'si'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350        # GitHub corta a las 6 h
+    env:
+      TZ: Europe/Madrid
+      CANAL: curiosidades-animadas
+      HYPERFRAMES_SKIP_SKILLS: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Programas (FFmpeg, fuentes, compilador para whisper)
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q ffmpeg cmake build-essential fonts-liberation fonts-dejavu-core
+          mkdir -p ~/.fonts
+          curl -fsSL -o ~/.fonts/ArchivoBlack-Regular.ttf \
+            https://github.com/google/fonts/raw/main/ofl/archivoblack/ArchivoBlack-Regular.ttf && fc-cache -f || true
+
+      - name: HyperFrames, Claude Code y Chrome
+        run: |
+          npm install -g hyperframes @anthropic-ai/claude-code
+          hyperframes --version && claude --version
+          hyperframes browser ensure
+
+      - name: Las skills, donde las busca Claude
+        run: |
+          mkdir -p ~/.claude/skills
+          cp -r skills-extra/hyperframes skills-extra/media-use ~/.claude/skills/
+          # La nuestra va enlazada: así el historial que apunta Claude queda en el repo.
+          ln -s "$GITHUB_WORKSPACE/skill-videos" ~/.claude/skills/skill-videos
+
+      - name: Calentar whisper (los subtítulos)
+        run: |
+          cd /tmp
+          ffmpeg -v error -f lavfi -i sine=d=2 -ar 16000 prueba.wav
+          hyperframes transcribe prueba.wav --model small --language es
+          hyperframes doctor || true
+
+      - name: Hacer el vídeo y subirlo programado
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          IDEA: ${{ github.event.inputs.idea }}
+          SALIDA: ${{ github.workspace }}/salida
+        run: |
+          mkdir -p logs
+          LOG="logs/dia-$(date +%Y-%m-%d-%H%M).txt"
+          bash skill-videos/automatizacion/dia.sh "$CANAL" 2>&1 | tee "$LOG"
+          exit "${PIPESTATUS[0]}"
+
+      - name: Guardar el historial del canal en el repo
+        if: always()
+        run: |
+          git config user.name "video-del-dia"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skill-videos/automatizacion/canales/*-historial.md skill-videos/automatizacion/canales/*-programados.json
+          if git diff --cached --quiet; then echo "Sin cambios en el historial."; exit 0; fi
+          git commit -m "Historial: vídeo del $(date +%Y-%m-%d)"
+          git pull --rebase -q && git push
+
+      - name: Guardar el vídeo y el registro (7 días)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ github.run_id }}
+          retention-days: 7
+          if-no-files-found: ignore
+          path: |
+            logs/
+            salida/**/video.mp4
+            salida/**/portada.jpg
+            salida/**/resumen.json
+            salida/**/guion.*
+            salida/**/plan.md
+            salida/**/claude.log

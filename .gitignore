@@ -1,0 +1,9 @@
+# Lo que NO va al repo
+salida/
+logs/
+node_modules/
+__pycache__/
+*.zip
+skill-videos/automatizacion/canales/autorizado.json
+# Fotogramas de otro creador: solo para mirar en el PC, no se publican
+skill-videos/referencias/fotogramas/

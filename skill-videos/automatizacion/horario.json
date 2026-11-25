@@ -1,0 +1,25 @@
+{
+  "_comentario": [
+    "A qué hora sale el vídeo cada día. Horas de Madrid; el desfase (+01:00 en invierno,",
+    "+02:00 en verano) lo calcula cuando.mjs, no lo escribas aquí.",
+    "",
+    "'mejor' es la hora buena del día. 'segunda' solo se usa si la mejor ya ha pasado",
+    "cuando se sube el vídeo, cosa que con el reloj de las 4:30 no llega a ocurrir:",
+    "es la red de seguridad para cuando lo lances a mano por la tarde.",
+    "",
+    "Ojo: el sábado y el domingo la segunda es por la MAÑANA, antes que la mejor.",
+    "El cálculo no asume que la segunda sea más tarde; mira cuál sigue en el futuro.",
+    "",
+    "Si cambias una hora, escríbela como 'HH:MM' en 24 h. Para quitar un hueco, pon null."
+  ],
+  "zona": "Europe/Madrid",
+  "dias": {
+    "lunes":     { "mejor": "18:00", "segunda": "21:00" },
+    "martes":    { "mejor": "18:00", "segunda": "21:30" },
+    "miercoles": { "mejor": "17:30", "segunda": "21:00" },
+    "jueves":    { "mejor": "18:00", "segunda": "21:30" },
+    "viernes":   { "mejor": "16:00", "segunda": "19:30" },
+    "sabado":    { "mejor": "17:00", "segunda": "11:30" },
+    "domingo":   { "mejor": "18:30", "segunda": "12:00" }
+  }
+}
