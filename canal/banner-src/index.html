@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es"><head><meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@800&display=block" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js" } }</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:2560px;height:1440px;overflow:hidden;background:#000}
+#mundo{position:absolute;left:0;top:0;width:2560px;height:1440px;display:block}
+/* Zona segura para todos los dispositivos: 1546×423 centrada */
+#seguro{position:absolute;left:507px;top:508px;width:1546px;height:424px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.titulo{font:400 128px/0.95 "Archivo Black",sans-serif;color:#fff;text-transform:uppercase;text-align:center;-webkit-text-stroke:22px #241726;paint-order:stroke fill;letter-spacing:2px}
+.titulo em{font-style:normal;color:#ffd23f}
+.lema{font:800 44px/1 "Montserrat",sans-serif;color:#fff;-webkit-text-stroke:12px #241726;paint-order:stroke fill;margin-top:14px}
+.guia #seguro{outline:6px dashed #0f0}
+</style>
+</head><body><canvas id="mundo" width="2560" height="1440"></canvas>
+<div id="seguro"><div class="titulo">Curiosidades<br><em>Animadas</em></div><div class="lema">Lo que no sabías · un short cada día</div></div>
+<script type="module">
+import { crearEscena } from "./escena.js";
+const q = new URLSearchParams(location.search);
+if (q.get("guia")) document.body.classList.add("guia");
+const mundo = await crearEscena(document.getElementById("mundo"));
+mundo.render(1.2); mundo.render(1.2);
+await document.fonts.ready;
+document.title = "LISTO";
+</script></body></html>
