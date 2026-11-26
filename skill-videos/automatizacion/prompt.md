@@ -68,7 +68,7 @@ sigue roto, para y di claramente en el último mensaje qué ha fallado.
   `line_unread` en `.sub`, `contrast_aa_failure` en `.clave`, `canvas_content_at_edge`,
   `timeline_track_too_dense`, `KHR_parallel_shader_compile`) **se dejan tal cual**: no son errores.
 - **Mira los fotogramas** de `~/.claude/skills/skill-videos/referencias/fotogramas/` antes de montar,
-  para tener el estilo en la cabeza (si la carpeta no está, usa `referencias/estilo.md` y sigue). No copies sus personajes, sus historias ni sus planos, y no los
+  para tener el estilo en la cabeza. No copies sus personajes, sus historias ni sus planos, y no los
   uses en el vídeo.
 - **El tema sale del brief del canal** que viene más abajo, y **no puede repetir** ninguno de los
   temas del historial.
