@@ -6,3 +6,4 @@ No lo borres: es la memoria del canal.
 <!-- una línea por vídeo: - FECHA — tema — título -->
 - 2026-11-24 — el móvil mojado en un bote de arroz — ¿Qué pasa si metes el móvil mojado en arroz?
 - 2026-11-25 — por qué se arrugan los dedos en el agua (lo hace el sistema nervioso) — Tus dedos no se arrugan por el agua: lo hace tu cerebro
+- 2026-11-26 — por qué el metal parece más frío que la madera aunque estén a la misma temperatura (conducción del calor) — El metal no está más frío que la madera: te roba el calor
