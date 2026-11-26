@@ -73,6 +73,15 @@ sigue roto, para y di claramente en el último mensaje qué ha fallado.
 - **El tema sale del brief del canal** que viene más abajo, y **no puede repetir** ninguno de los
   temas del historial.
 
+## El principio y el final (lo que más cuenta en YouTube)
+
+- **Fotograma 0:** ya se mueve y ya engancha. La primera frase, 5 palabras como mucho. Antes de
+  renderizar, mira el snapshot de los segundos 0 y 0,5: si no te pararías a mirarlo, cámbialo.
+- **El final está en bucle:** la última frase enlaza con la primera, el último plano se parece al
+  primero, y el vídeo acaba como mucho 0,3 s después de la voz. Sin fundido a negro. Mira el
+  snapshot del último segundo junto al del segundo 0: tienen que parecerse.
+- La pregunta para comentar **no la dice la voz**: va en la descripción de `resumen.json`.
+
 ## El porqué se ENSEÑA, no se cuenta (cambio del 26/11)
 
 Rubén: «si hablas de una gota de agua y explicas de qué está hecha, que el plano se meta en la gota y
@@ -174,7 +183,8 @@ script, así que la forma es exacta:
 
 - **`titulo`**: menos de 100 caracteres, y mejor menos de 70 para que no se corte en el móvil.
 - **`descripcion`**: dos o tres líneas, **sin los hashtags** (los pega el script al final solita).
-  Acaba con la pregunta que pide el brief, la que da ganas de comentar.
+  Acaba con la pregunta que pide el brief, la que da ganas de comentar (la voz ya no la dice: el
+  vídeo acaba en bucle).
 - **`hashtags`**: las reglas del brief, y el script las comprueba y **se planta si no cuadran**: de 3
   a 5, en minúsculas, sin tildes ni eñes, con `#shorts` siempre, y ninguno de relleno.
 - **`portada`**: lo mismo que le pasas a `portada.sh`, apuntado para poder repetirla.

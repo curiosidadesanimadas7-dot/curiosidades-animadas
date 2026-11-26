@@ -40,6 +40,7 @@ El vídeo no sale a las 4:30: sale solo a su hora (por ejemplo, el miércoles a 
 | **Tema fijado a mano** | `canales/curiosidades-animadas-idea.md`: si existe, manda; `dia.sh` lo borra cuando el vídeo sale bien | Para que Rubén elija el tema de un día concreto |
 | **Animaciones** | Si explica cómo funciona algo, **la cámara entra en el objeto** y se ve el mecanismo (receta en `prompt.md`, «El porqué se ENSEÑA») | Rubén: «que el plano se meta en la gota y lo explique visualmente» |
 | **Estilo de los guiones** | Gancho en el primer segundo, como los 4 shorts de ejemplo | Ver el brief `canales/curiosidades-animadas.md` |
+| **Gancho y final** | Primera frase ≤ 5 palabras y el fotograma 0 ya en movimiento. **Final en bucle**: la última frase enlaza con la primera y el último plano se parece al primero. La pregunta para comentar va en la descripción, no en la voz (26/11) | Consejos de retención de Rubén: si menos del 70 % se queda, falla el gancho; los bucles se ven más veces |
 | **Comas** | Pocas en el guion; **ninguna en pantalla** | `subtitulos.mjs` las quita al escribir los subtítulos |
 | **Subir a YouTube** | `privacyStatus: private` + `publishAt` | Es como funciona «Programar» |
 | **App de Google** | **Publicada** | En modo prueba el permiso caduca a los 7 días |

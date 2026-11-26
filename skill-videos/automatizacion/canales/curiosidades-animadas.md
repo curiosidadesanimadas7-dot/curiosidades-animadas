@@ -55,7 +55,14 @@ WhatsApp. Le pasa a él, lo ve a diario o es tan bestia que no se lo cree.
 
 - **Habla de algo que el que mira conoce o ha vivido.** Una flexión, el martillito del médico, una
   ampolla, el agua que sale de un depósito. Le pasa a él, así que le importa.
-- **El primer segundo engancha, sin presentación.** Nada de «hoy te voy a contar». Funciona:
+- **El primer segundo engancha, sin presentación** (cambio del 26/11: si menos del 70 % se queda,
+  el fallo es el gancho). Reglas duras:
+  - **La primera frase tiene 5 palabras como mucho** y ya dice algo que choca.
+  - **El primer plano ya se mueve** en el fotograma 0: la acción empezada, la cámara empujando
+    fuerte. Nada de un plano general quieto, ni un personaje que aparece andando.
+  - Nada de «hoy te voy a contar», «¿sabías que…?» ni saludos.
+
+  Funciona:
   - **Una pregunta que le reta:** «¿No te sale ni una flexión? No es que seas débil.»
   - **Corregir lo que cree:** «Tu ampolla no es una quemadura. Tu piel se ha roto por dentro.»
   - **Algo que pasa y no se explica:** «Tu pierna da una patada sola. Y tu cerebro ni se entera.»
@@ -126,6 +133,15 @@ En `resumen.json`, además del título y la descripción:
 - **Dos o tres del tema exacto** del vídeo de hoy (`#cuerpohumano`, `#fisica`, `#espacio`, `#noticias`…).
 - **Ninguno de relleno:** nada de `#viral`, `#fyp` ni `#parati`.
 
-**Cómo acaba el vídeo:** con una pregunta al que lo ve, de las que dan ganas de contestar. Que salga
-de lo que se acaba de contar y se pueda responder en tres palabras: «¿Cuántas flexiones seguidas
-haces?», no un «¿y tú qué opinas?».
+**Cómo acaba el vídeo: en bucle** (cambio del 26/11). Los shorts que se repiten solos sin que se
+note el salto se ven más veces:
+
+- **La última frase de la voz enlaza con la primera.** Si el vídeo empieza «Te van a quitar el vaper
+  de sandía», la última frase acaba llevando a eso: «…y por eso te van a quitar el vaper de
+  sandía». Al volver a empezar, suena a continuación.
+- **El último plano se parece al primero:** el mismo sitio y un encuadre parecido, para que el corte
+  al repetirse no se note. Sin fundido a negro ni pantalla final.
+- **Sin pausa al final:** la voz acaba y el vídeo termina como mucho 0,3 s después.
+- **La pregunta para comentar ya no la dice la voz:** va en la descripción (ver arriba) y puede ir
+  escrita en pantalla los últimos 2 segundos. Que se pueda responder en tres palabras: «¿Cuántas
+  flexiones seguidas haces?», no un «¿y tú qué opinas?».
