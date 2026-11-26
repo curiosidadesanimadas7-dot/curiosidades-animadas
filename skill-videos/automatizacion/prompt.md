@@ -1,4 +1,6 @@
-# Encargo: el vídeo de hoy para `{{CANAL}}` ({{FECHA}})
+# Encargo: el vídeo de hoy para `{{CANAL}}` ({{DIA}} {{FECHA}})
+
+**Hoy es {{DIA}}:** el tema sale de la semana temática del brief (salvo noticia gorda o tema fijado).
 
 Haz un vídeo entero, de principio a fin, con la skill **`videos-historia-ilustrada`** (está en
 `~/.claude/skills/skill-videos/SKILL.md`). Léela antes de empezar y sigue sus 6 pasos **en orden**.

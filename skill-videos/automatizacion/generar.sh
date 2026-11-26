@@ -22,6 +22,8 @@ HISTORIAL="$AQUI/canales/$CANAL-historial.md"
 #   bash generar.sh curiosidades-animadas 2026-11-24/1-publicar
 SALIDA="${SALIDA:-$PWD/salida}"
 FECHA="$(TZ=Europe/Madrid date +%Y-%m-%d)"
+DIAS=(domingo lunes martes miércoles jueves viernes sábado)
+DIA="${DIAS[$(TZ=Europe/Madrid date +%w)]}"
 NOMBRE="${2:-$FECHA}"
 PROYECTO="$SALIDA/$CANAL/$NOMBRE"
 PADRE="$(dirname "$PROYECTO")"
@@ -89,6 +91,7 @@ ENCARGO="$PROYECTO/encargo.md"
 {
   sed -e "s|{{CANAL}}|$CANAL|g" \
       -e "s|{{FECHA}}|$FECHA|g" \
+      -e "s|{{DIA}}|$DIA|g" \
       -e "s|{{HISTORIAL}}|$HISTORIAL|g" \
       "$AQUI/prompt.md"
   echo

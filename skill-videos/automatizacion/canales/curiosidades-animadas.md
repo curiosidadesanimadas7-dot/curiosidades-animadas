@@ -22,7 +22,7 @@
 > **Cambio del 26/11 (Rubén):** «el de hoy es un tostón, a nadie le importa que el metal conduce más
 > que la madera». Se acabaron las curiosidades de libro de texto. Cada vídeo es una de estas dos:
 
-**1. Actualidad (la mitad de los días, o más):** una noticia de **los últimos 7 días** que le toque
+**1. Actualidad (miércoles y domingo, y cualquier día con una noticia gorda):** una noticia de **los últimos 7 días** que le toque
 de cerca a alguien de 14 a 25 años en España, explicada con su porqué. Ejemplos del tipo:
 - una ley o norma nueva que les cambia algo (prohibir los vapers de sabores, los móviles en clase,
   el precio del transporte, un cambio en el carnet de conducir…);
@@ -47,6 +47,29 @@ WhatsApp. Le pasa a él, lo ve a diario o es tan bestia que no se lo cree.
   sueño después de comer… y no es la comida».
 - **No (tostón):** «el metal conduce más que la madera», «por qué el cielo es azul», «cuántos huesos
   tienes», o cualquier dato que viene en el libro de 2º de la ESO.
+
+**La semana temática (desde el 26/11).** El tema del día sale de esta tabla, según el día de la
+semana que pone en el título del encargo:
+
+| Día | Tema | Por qué ese día |
+|---|---|---|
+| **Lunes** | 🎮 **Videojuegos**: curiosidades de juegos (cómo se hizo algo, por qué funciona así, récords, secretos) | Los vídeos de juegos rinden algo mejor el lunes y el martes; vuelven de jugar el finde |
+| **Martes** | 🏛️ **Historia**: un hecho o personaje real que suene increíble | El día casi no importa en educación |
+| **Miércoles** | 📰 **Actualidad**: la noticia más importante de la semana para gente de 14-25 en España | A mitad de semana ya hay de qué hablar |
+| **Jueves** | 🔬 **Ciencia y espacio** | Buen día para Shorts |
+| **Viernes** | 🤯 **La curiosidad más bestia de la semana**, la mejor bala | El mejor día para Shorts en varios estudios |
+| **Sábado** | 🧍 **Cuerpo humano / «¿qué pasa si…?»**: algo que le pasa a él | Más tiempo libre |
+| **Domingo** | 📰 **Lo más loco de la semana**: una noticia ligera o sorprendente | El día más flojo: algo fácil de ver |
+
+Reglas encima de la tabla:
+1. **Si hay una noticia gorda** que le toca de cerca a tu público (de los últimos 2-3 días), manda
+   sobre el tema del día.
+2. **Si Rubén ha fijado un tema** («La idea de hoy», más abajo), manda ese.
+3. **Videojuegos sin copyright:** nada de personajes, logos, mapas ni capturas de ningún juego. Se
+   cuenta la curiosidad con nuestros personajes y objetos genéricos (un mando, una pantalla, un
+   «bloque» que no sea el de ningún juego). El nombre del juego puede decirse; dibujarlo, no.
+4. Dentro del tema del día siguen valiendo todas las reglas de abajo: que flipe, que sea verdad y
+   comprobado, y nada de libro de texto.
 
 **El test antes de elegir:** ¿alguien de 17 años lo mandaría a su grupo de amigos? Si la respuesta es
 «meh», cambia de tema.
@@ -74,7 +97,7 @@ WhatsApp. Le pasa a él, lo ve a diario o es tan bestia que no se lo cree.
   y por qué. Cada frase empuja a la siguiente («pero», «así que», «y aquí viene lo raro»).
 - **Un giro a mitad:** lo que nadie se espera, o lo que demuestra que lo que creía era al revés.
 - **Una sola idea por vídeo.** Nada de listas ni de «cinco datos de…».
-- **Varía:** no dos días seguidos del mismo campo (dos del cuerpo, dos del espacio…). Mira el
+- **Varía:** sigue la semana temática y, dentro de cada tema, no repitas lo de la semana pasada. Mira el
   historial.
 - **Tiene que ser verdad y comprobable.** Si no estás seguro de una cifra, no la pongas. Apunta en
   `guion.md` de dónde sale cada dato.
