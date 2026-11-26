@@ -42,6 +42,7 @@ El vídeo no sale a las 4:30: sale solo a su hora (por ejemplo, el miércoles a 
 | **Animaciones** | Si explica cómo funciona algo, **la cámara entra en el objeto** y se ve el mecanismo (receta en `prompt.md`, «El porqué se ENSEÑA») | Rubén: «que el plano se meta en la gota y lo explique visualmente» |
 | **Estilo de los guiones** | Gancho en el primer segundo, como los 4 shorts de ejemplo | Ver el brief `canales/curiosidades-animadas.md` |
 | **Formas de contar** | A) historia real como thriller (historia), B) mini-historia con personajes que demuestra el dato, lo inventado se dice en la descripción (curiosidades, ciencia, videojuegos), C) explicación directa con números (actualidad, tecnología, cuerpo). Se mezclan con lo de antes. `guion.md` apunta cuál se usó | Ejemplos de Rubén del 26/11: Comandante Porqué (espía Garbo), Timeless moments (tren con neumáticos), rjavie (contraseñas) |
+| **Miniatura** | `portada.jpg` **vertical 1080×1920**, fotograma con cara expresiva y el texto grande arriba (gancho blanco + clave amarilla) | La de 1280×720 se subía («Portada puesta») pero en los Shorts no se veía (26/11) |
 | **Gancho y final** | Primera frase ≤ 5 palabras y el fotograma 0 ya en movimiento. **Final en bucle**: la última frase enlaza con la primera y el último plano se parece al primero. La pregunta para comentar va en la descripción, no en la voz (26/11) | Consejos de retención de Rubén: si menos del 70 % se queda, falla el gancho; los bucles se ven más veces |
 | **Comas** | Pocas en el guion; **ninguna en pantalla** | `subtitulos.mjs` las quita al escribir los subtítulos |
 | **Subir a YouTube** | `privacyStatus: private` + `publishAt` | Es como funciona «Programar» |
@@ -71,7 +72,7 @@ skill-videos-github/
         ├── generar.sh        UN vídeo: carpeta + encargo + claude -p (con permisos limitados)
         ├── prompt.md         el encargo que recibe Claude
         ├── voz.sh            voz.wav + transcript.json (Gemini)
-        ├── portada.sh        portada.jpg 1280×720 sacada del vídeo
+        ├── portada.sh        portada.jpg 1080×1920 (vertical) sacada del vídeo, con el texto arriba
         ├── cuando.mjs        a qué hora sale el vídeo (con cambios de hora)
         ├── horario.json      la tabla de días y horas
         ├── subir.mjs         sube a YouTube, programado

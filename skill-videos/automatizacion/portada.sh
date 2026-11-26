@@ -3,9 +3,12 @@
 #
 #   GANCHO="No duermes" CLAVE="3 DÍAS" SEGUNDO=12.4 bash .../automatizacion/portada.sh
 #
-# Coge un fotograma del vídeo, lo recorta a 16:9 a la altura de las caras y le pone
-# el gancho encima con la tipografía de la plantilla: blanco con borde ciruela grueso
-# y la palabra clave en amarillo. Deja portada.jpg de 1280×720.
+# Coge un fotograma del vídeo, ENTERO y en vertical, y le pone el gancho encima con la
+# tipografía de la plantilla: blanco con borde ciruela grueso y la palabra clave en
+# amarillo, grandes, arriba (por encima de la cabeza). Deja portada.jpg de 1080×1920.
+#
+# Vertical desde el 26/11: en los Shorts, YouTube enseña la miniatura en vertical (pestaña
+# Shorts del canal, estantes, búsqueda). La de 1280×720 se subía bien pero no se veía.
 #
 # Se lanza DESDE DENTRO de la carpeta del vídeo. Solo necesita ffmpeg.
 set -euo pipefail
@@ -81,44 +84,37 @@ trap 'rm -f "$G_FF" "$C_FF"' EXIT
 printf '%s' "$GANCHO" > "$G_FF"
 printf '%s' "$CLAVE"  > "$C_FF"
 
-# --- El recorte ---------------------------------------------------------------
-# 16:9 a lo ancho completo: de 1080 de ancho salen 1080x608, que luego se estira a
-# 1280x720. OJO con esto: la altura se calcula sobre el ANCHO (iw*9/16). Hacerlo
-# sobre la altura (ih*9/16) da 1080x1080, un cuadrado, y el vídeo sale achatado.
+# --- El formato ---------------------------------------------------------------
+# RECORTE_Y ya no se usa (era para la portada horizontal); se acepta para no romper nada.
 ANCHO=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$VIDEO")
 ALTO=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$VIDEO")
-ALTO_CORTE=$(awk -v w="$ANCHO" 'BEGIN{ printf "%d", int(w * 9 / 16 / 2) * 2 }')
-MAX_Y=$((ALTO - ALTO_CORTE))
-[ "$MAX_Y" -ge 0 ] || morir "El vídeo (${ANCHO}x${ALTO}) es más ancho que alto: esto es para vertical."
-if [ "$RECORTE_Y" -gt "$MAX_Y" ]; then
-  printf '    (RECORTE_Y=%s se sale; lo bajo a %s)\n' "$RECORTE_Y" "$MAX_Y"
-  RECORTE_Y="$MAX_Y"
-fi
+[ "$ALTO" -gt "$ANCHO" ] || morir "El vídeo (${ANCHO}x${ALTO}) no es vertical."
 
 # --- El tamaño de la letra ----------------------------------------------------
 # drawtext no sabe encogerse solo, así que se estima: con una fuente negra, cada
 # letra ocupa como 0,60 del cuerpo. Si no cabe en 1.180 px, se baja el cuerpo.
-cuerpo() { # cuerpo <texto> <cuerpo_ideal>
-  awk -v t="$1" -v ideal="$2" 'BEGIN{
+cuerpo() { # cuerpo <texto> <cuerpo_ideal> <ancho_por_letra>
+  awk -v t="$1" -v ideal="$2" -v k="${3:-0.62}" 'BEGIN{
     n = length(t); if (n == 0) { print ideal; exit }
-    cabe = 1180 / (n * 0.60);
+    cabe = 960 / (n * k);
     c = (cabe < ideal) ? cabe : ideal;
-    if (c < 44) c = 44;
+    if (c < 60) c = 60;
     printf "%d", c
   }'
 }
-C_GANCHO=$(cuerpo "$GANCHO" 96)
-C_CLAVE=$(cuerpo "$CLAVE" 132)
+C_GANCHO=$(cuerpo "$GANCHO" 120 0.64)
+C_CLAVE=$(cuerpo "$CLAVE" 190 0.86)   # en mayúsculas y negrita, cada letra es más ancha
 
 # --- Montarla ----------------------------------------------------------------
-FILTRO="crop=iw:${ALTO_CORTE}:0:${RECORTE_Y},scale=1280:720"
+# La cabeza va al 28-35 % de la altura: el texto va ENCIMA, entre el 8 % y el 25 %.
+FILTRO="scale=1080:1920"
 if [ -n "$GANCHO" ] && [ -n "$CLAVE" ]; then
-  FILTRO="$FILTRO,drawtext=fontfile='${FUENTE_FF}':textfile='${G_FF}':expansion=none:fontsize=${C_GANCHO}:fontcolor=white:borderw=11:bordercolor=${TINTA}:x=(w-text_w)/2:y=h-290"
-  FILTRO="$FILTRO,drawtext=fontfile='${FUENTE_FF}':textfile='${C_FF}':expansion=none:fontsize=${C_CLAVE}:fontcolor=${AMARILLO}:borderw=14:bordercolor=${TINTA}:x=(w-text_w)/2:y=h-175"
+  FILTRO="$FILTRO,drawtext=fontfile='${FUENTE_FF}':textfile='${G_FF}':expansion=none:fontsize=${C_GANCHO}:fontcolor=white:borderw=14:bordercolor=${TINTA}:x=(w-text_w)/2:y=170"
+  FILTRO="$FILTRO,drawtext=fontfile='${FUENTE_FF}':textfile='${C_FF}':expansion=none:fontsize=${C_CLAVE}:fontcolor=${AMARILLO}:borderw=18:bordercolor=${TINTA}:x=(w-text_w)/2:y=170+${C_GANCHO}*1.15"
 else
   UNICO="$C_FF"; COLOR="$AMARILLO"; CUERPO="$C_CLAVE"
   if [ -z "$CLAVE" ]; then UNICO="$G_FF"; COLOR=white; CUERPO="$C_GANCHO"; fi
-  FILTRO="$FILTRO,drawtext=fontfile='${FUENTE_FF}':textfile='${UNICO}':expansion=none:fontsize=${CUERPO}:fontcolor=${COLOR}:borderw=14:bordercolor=${TINTA}:x=(w-text_w)/2:y=h-220"
+  FILTRO="$FILTRO,drawtext=fontfile='${FUENTE_FF}':textfile='${UNICO}':expansion=none:fontsize=${CUERPO}:fontcolor=${COLOR}:borderw=18:bordercolor=${TINTA}:x=(w-text_w)/2:y=220"
 fi
 
 ffmpeg -v error -y -ss "$SEGUNDO" -i "$VIDEO" -frames:v 1 -vf "$FILTRO" -q:v 2 "$SALIDA" \
@@ -134,6 +130,6 @@ if [ "$BYTES" -gt 2000000 ]; then
 fi
 [ "$BYTES" -le 2000000 ] || morir "La portada pesa $BYTES bytes y YouTube solo acepta 2 MB."
 
-printf '\n==> Portada lista: %s — 1280x720, %s KB, del segundo %s (fuente: %s)\n' \
+printf '\n==> Portada lista: %s — 1080x1920, %s KB, del segundo %s (fuente: %s)\n' \
   "$SALIDA" "$((BYTES / 1024))" "$SEGUNDO" "$(basename "$FUENTE")"
-printf '    Mírala antes de subirla: que no tape una cara y que se lea en pequeño.\n'
+printf '    Mírala antes de subirla: que el texto no tape la cara y que se lea en pequeño.\n'

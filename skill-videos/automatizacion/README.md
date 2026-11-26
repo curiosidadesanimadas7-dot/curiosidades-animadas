@@ -81,16 +81,16 @@ una pasada de whisper entera. No ejecutes `hyperframes transcribe` después.
 
 La saca `automatizacion/portada.sh` del propio vídeo, con la tipografía de la plantilla: el gancho
 en blanco con el borde ciruela grueso y la palabra clave en amarillo, igual que las palabras clave
-del vídeo. Deja `portada.jpg` de 1280×720, que es lo que YouTube pide.
+del vídeo. Deja `portada.jpg` de **1080×1920, en vertical**, con el texto grande arriba. Hasta el
+26/11 era de 1280×720: YouTube la aceptaba, pero en los Shorts no se veía (usa la vertical).
 
 ```sh
 GANCHO="Qué pasa si no duermes" CLAVE="3 DÍAS" SEGUNDO=12.4 bash automatizacion/portada.sh
 ```
 
 El fotograma y el texto los elige Claude al montar el vídeo, porque hay que saber cuál es el momento
-más expresivo. Lo que no sabe es si la cara queda bien encuadrada, así que **mira la portada** y, si
-corta mal, se repite con otro `SEGUNDO` o cambiando `RECORTE_Y` (la altura del recorte 16:9 dentro
-del vertical). No hay que volver a renderizar: cuesta un segundo.
+más expresivo. Lo que no sabe es si el texto tapa la cara, así que **mira la portada** y, si sale
+mal, se repite con otro `SEGUNDO` u otro texto. No hay que volver a renderizar: cuesta un segundo.
 
 **Para que YouTube te acepte una portada propia, el canal tiene que estar verificado**
 (youtube.com/verify, con el móvil). Sin eso, el vídeo se sube bien pero la portada da error de

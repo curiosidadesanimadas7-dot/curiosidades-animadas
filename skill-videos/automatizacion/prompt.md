@@ -135,7 +135,7 @@ El render va con el procesador, así que cada fotograma cuesta. Para no gastar e
 | `plan.md` | La tabla del paso 3, con los segundos de la transcripción |
 | `escena.js` e `index.html` | El vídeo montado |
 | `video.mp4` | **El vídeo, 1080×1920 a 60 fps, entre 55 y 70 s** |
-| `portada.jpg` | La portada, 1280×720 (mira abajo) |
+| `portada.jpg` | La portada, 1080×1920 en vertical (mira abajo) |
 | `resumen.json` | Lo que necesita YouTube (mira abajo). **Es un JSON, no un texto suelto:** lo lee un script |
 
 Y una cosa más, la última: **añade una línea al final de `{{HISTORIAL}}`**, con este formato exacto,
@@ -145,30 +145,29 @@ para que el vídeo de mañana no repita el tema:
 - {{FECHA}} — <el tema en pocas palabras> — <el título de resumen.json>
 ```
 
-## La portada
+## La portada (la miniatura de YouTube, en vertical)
 
 Después del render, saca la portada del propio vídeo:
 
 ```sh
-GANCHO="Tu tripa ruge" CLAVE="LIMPIANDO" SEGUNDO=12.4 RECORTE_Y=380 \
-  bash ~/.claude/skills/skill-videos/automatizacion/portada.sh
+GANCHO="¿Móvil en arroz?" CLAVE="NO FUNCIONA" SEGUNDO=12.4   bash ~/.claude/skills/skill-videos/automatizacion/portada.sh
 ```
 
-Las cuatro cosas las eliges tú, y son las que hacen que alguien pare el dedo:
+Sale `portada.jpg` de **1080×1920** (vertical: así la enseña YouTube en los Shorts), con el
+fotograma entero y el texto **grande arriba, por encima de la cabeza**: el gancho en blanco y la
+clave en amarillo. Es lo que ve la gente en la pestaña Shorts del canal, en los estantes y en la
+búsqueda, así que es lo que hace que alguien pulse.
 
-- **`SEGUNDO`**: el fotograma más expresivo de todo el vídeo. Una cara con una emoción clara, o el
-  momento del golpe. **Ni el primer segundo ni uno con subtítulo largo en pantalla.** Si dudas, saca
-  varios con `npx hyperframes snapshot` y mira cuál tira más.
-- **`GANCHO`**: el gancho del vídeo en pocas palabras, en blanco. Puede ir vacío si la clave sola
-  ya se entiende.
-- **`CLAVE`**: una o dos palabras, en amarillo, que es el remate. En mayúsculas.
-- **`RECORTE_Y`**: a qué altura del vídeo vertical se recorta la franja 16:9. Con 380 la cara suele
-  quedar bien, porque la plantilla pone la cabeza al 28-35 % de la altura. Si al mirar la portada la
-  cara sale cortada, súbelo o bájalo y vuelve a lanzarlo.
+- **`SEGUNDO`**: el fotograma más expresivo del vídeo: **una cara grande con una emoción clara**
+  (sorpresa, miedo, risa) o el momento del golpe. **Ni el primer segundo, ni un plano sin
+  personaje**, y mejor sin subtítulo en pantalla (busca un hueco entre frases). Si dudas, saca
+  varios con `npx hyperframes snapshot` y elige el que más tire.
+- **`GANCHO`**: 2-4 palabras en blanco que dan curiosidad («¿Móvil en arroz?», «Tus dedos»).
+- **`CLAVE`**: 1-2 palabras en amarillo, en mayúsculas, que son el remate («NO FUNCIONA»).
 
-**Mira la portada cuando esté** (es un `.jpg`, ábrelo): que se lea de un vistazo en pequeño, que el
-texto no tape ninguna cara y que la cara no salga cortada. Si algo de eso falla, cambia `SEGUNDO` o
-`RECORTE_Y` y repítela: cuesta un segundo, no hay que volver a renderizar nada.
+**Mira la portada cuando esté** (es un `.jpg`, ábrelo): que el texto se lea en pequeño, que no tape
+la cara y que haya una cara. Si algo falla, cambia `SEGUNDO` o el texto y repítela: cuesta un
+segundo.
 
 ## `resumen.json`
 
@@ -181,7 +180,7 @@ script, así que la forma es exacta:
   "descripcion": "Cada hora y media, con el estómago vacío, una ola de músculo barre lo que queda.\n¿A ti te suena en clase o en el cine?",
   "etiquetas": ["curiosidades", "cuerpo humano", "estómago"],
   "hashtags": ["#shorts", "#curiosidades", "#cuerpohumano", "#digestion"],
-  "portada": { "gancho": "Tu tripa ruge", "clave": "LIMPIANDO", "segundo": 12.4, "recorte_y": 380 }
+  "portada": { "gancho": "Tu tripa ruge", "clave": "LIMPIANDO", "segundo": 12.4 }
 }
 ```
 
