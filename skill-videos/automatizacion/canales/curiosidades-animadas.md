@@ -17,28 +17,35 @@
 > - «Misma agua, misma llave. ¿Qué tanque se vacía primero?» (Scientia Explained)
 > - «Tu ampolla no es una quemadura: tu piel se rasgó por dentro» (1Cell1Life)
 
-## El tema de cada día: actualidad o una curiosidad que de verdad flipe
+## El tema de cada día: la semana temática… salvo que pase algo TOCHO
 
 > **Cambio del 26/11 (Rubén):** «el de hoy es un tostón, a nadie le importa que el metal conduce más
-> que la madera». Se acabaron las curiosidades de libro de texto. Cada vídeo es una de estas dos:
+> que la madera». Se acabaron las curiosidades de libro de texto.
 
-**1. Actualidad (miércoles y domingo, y cualquier día con una noticia gorda):** una noticia de **los últimos 7 días** que le toque
-de cerca a alguien de 14 a 25 años en España, explicada con su porqué. Ejemplos del tipo:
-- una ley o norma nueva que les cambia algo (prohibir los vapers de sabores, los móviles en clase,
-  el precio del transporte, un cambio en el carnet de conducir…);
-- tecnología que usan (una función nueva de una app, por qué ha caído un servicio, la IA en algo
-  cotidiano);
-- ciencia o espacio que es noticia (un récord, una misión, un descubrimiento);
-- deporte, dinero o consumo con un «¿y esto por qué?» detrás (por qué sube algo de precio, un récord).
+**1. Actualidad: solo si es TOCHA, y entonces manda sobre cualquier día.** Rubén: «si pasa algo en
+el mundo que sea tocho, que SABES que va a tener muchas visitas casi seguro, cambias el tema de ese
+día y pones ese vídeo». No hay día fijo de noticias: **cada día, antes de nada, mira si ha pasado
+algo así**; si no, toca el tema de la semana temática.
 
-**Cómo se busca:** con **WebSearch**. Busca noticias de España de los últimos días, elige la que más
-hablaría tu público y **comprueba cada dato en dos fuentes** (WebFetch para leerlas). Apunta en
-`guion.md` las fuentes con su fecha. Si no encuentras una buena noticia verificable, haz una
-curiosidad del tipo 2.
+Una noticia es TOCHA si cumple **todo** esto:
+- Ha pasado en las **últimas 48 horas** (el vídeo sale ese mismo día: luego ya llega tarde).
+- **Está en todas partes:** sale en portada de varios medios grandes (de España y de fuera) y la
+  gente la está buscando y comentando en redes. Ejemplos del tipo: algo sonado de una persona o
+  empresa que todo el mundo conoce (el CEO de Nvidia, Apple, Elon Musk, un youtuber gigante), el
+  lanzamiento o la caída de algo que usan todos (WhatsApp, un juego enorme, una consola, la IA),
+  un récord o un fenómeno que se ha hecho viral, una ley que les cambia la vida (como los vapers de
+  sabores).
+- **Tiene un porqué que contar** en 60 segundos («¿por qué ha pasado esto?», «¿qué significa para
+  ti?»), no solo el titular.
+- **Se puede comprobar:** cada dato en **dos fuentes serias** (WebSearch para encontrarla y WebFetch
+  para leerla). Las fuentes, con su fecha, en `guion.md` y en la descripción.
 
-**De actualidad, NO:** política de partidos ni opinar sobre quién tiene razón, sucesos con víctimas,
-tragedias, guerras, ni nada que haya que contar con morbo. La noticia se cuenta como es y se
-explica el porqué.
+Si dudas de si es tocha, **no lo es**: haz el tema del día. Más vale una curiosidad buena que una
+noticia floja o que ya ha contado todo el mundo hace una semana.
+
+**De actualidad, NO** (aunque sea tocha): política de partidos ni opinar sobre quién tiene razón,
+sucesos con víctimas, tragedias, guerras, ni nada que haya que contar con morbo. La noticia se cuenta
+como es y se explica el porqué.
 
 **2. Curiosidades que de verdad flipan:** algo que le hace decir «¿QUÉ?» y querer mandarlo por
 WhatsApp. Le pasa a él, lo ve a diario o es tan bestia que no se lo cree.
@@ -55,14 +62,14 @@ semana que pone en el título del encargo:
 |---|---|---|
 | **Lunes** | 🎮 **Videojuegos**: curiosidades de juegos (cómo se hizo algo, por qué funciona así, récords, secretos) | Los vídeos de juegos rinden algo mejor el lunes y el martes; vuelven de jugar el finde |
 | **Martes** | 🏛️ **Historia**: un hecho o personaje real que suene increíble | El día casi no importa en educación |
-| **Miércoles** | 📰 **Actualidad**: la noticia más importante de la semana para gente de 14-25 en España | A mitad de semana ya hay de qué hablar |
+| **Miércoles** | 💻 **Tecnología e internet**: móviles, apps, IA, redes, por qué algo funciona así | Lo usan a diario; el día casi no importa |
 | **Jueves** | 🔬 **Ciencia y espacio** | Buen día para Shorts |
 | **Viernes** | 🤯 **La curiosidad más bestia de la semana**, la mejor bala | El mejor día para Shorts en varios estudios |
 | **Sábado** | 🧍 **Cuerpo humano / «¿qué pasa si…?»**: algo que le pasa a él | Más tiempo libre |
-| **Domingo** | 📰 **Lo más loco de la semana**: una noticia ligera o sorprendente | El día más flojo: algo fácil de ver |
+| **Domingo** | 💸 **Dinero y el mundo**: por qué algo cuesta lo que cuesta, lugares y récords increíbles | El día más flojo: algo fácil de ver |
 
 Reglas encima de la tabla:
-1. **Si hay una noticia gorda** que le toca de cerca a tu público (de los últimos 2-3 días), manda
+1. **Si ha pasado algo TOCHO** (ver arriba: últimas 48 h, en todas partes, comprobable), manda
    sobre el tema del día.
 2. **Si Rubén ha fijado un tema** («La idea de hoy», más abajo), manda ese.
 3. **Videojuegos sin copyright:** nada de personajes, logos, mapas ni capturas de ningún juego. Se
@@ -135,7 +142,7 @@ Ejemplo: «Why They Put Tires on a Train» (Timeless moments, 6,8 M).
   En la descripción, siempre: «La historia real: …» con los datos y «Inventado para la historia: …»
   (los personajes, la apuesta…).
 
-### C. La explicación directa que te toca a ti → para **actualidad, tecnología, cuerpo, dinero**
+### C. La explicación directa que te toca a ti → para **noticias tochas, tecnología, cuerpo, dinero**
 Ejemplo: «¿Tu contraseña es de 8 letras? Un hacker la rompe en segundos» (rjavie, 2 M).
 - **Pregunta que le afecta + respuesta que asusta en la misma frase:** «¿Cuánto tarda un hacker en
   adivinar tu contraseña? Si tiene ocho letras, menos de lo que tardas en leer esta frase.»

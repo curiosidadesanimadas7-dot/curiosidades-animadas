@@ -1,6 +1,8 @@
 # Encargo: el vídeo de hoy para `{{CANAL}}` ({{DIA}} {{FECHA}})
 
-**Hoy es {{DIA}}:** el tema sale de la semana temática del brief (salvo noticia gorda o tema fijado).
+**Hoy es {{DIA}}.** Lo primero: busca con WebSearch si en las últimas 48 h ha pasado algo TOCHO (mira
+el brief). Si lo hay, ese es el vídeo. Si no, el tema sale de la semana temática del brief. Un tema
+fijado por Rubén manda sobre los dos.
 
 Haz un vídeo entero, de principio a fin, con la skill **`videos-historia-ilustrada`** (está en
 `~/.claude/skills/skill-videos/SKILL.md`). Léela antes de empezar y sigue sus 6 pasos **en orden**.
