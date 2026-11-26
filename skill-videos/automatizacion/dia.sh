@@ -29,7 +29,8 @@ PRIMERO_OK=0
 for i in "${!HUECOS[@]}"; do
   H="${HUECOS[$i]}"
   titulo "Vídeo $((i + 1)) de ${#HUECOS[@]}: $H"
-  if SALIDA="$SALIDA" bash "$AQUI/generar.sh" "$CANAL" "$FECHA/$H"; then
+  # Claude no necesita las claves de YouTube: se las quitamos para que no las vea nunca.
+  if env -u YT_CLIENT_ID -u YT_CLIENT_SECRET -u YT_REFRESH_TOKEN        SALIDA="$SALIDA" bash "$AQUI/generar.sh" "$CANAL" "$FECHA/$H"; then
     RESULTADO+=("$H: hecho")
     if [ "$i" -eq 0 ]; then PRIMERO_OK=1; fi
   else

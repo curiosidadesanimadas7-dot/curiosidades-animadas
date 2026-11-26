@@ -119,6 +119,31 @@ jobs:
           git commit -m "Historial: vídeo del $(date +%Y-%m-%d)"
           git pull --rebase -q && git push
 
+      - name: Tachar cualquier clave de los registros antes de guardarlos
+        if: always()
+        env:
+          K1: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          K2: ${{ secrets.GEMINI_API_KEY }}
+          K3: ${{ secrets.YT_CLIENT_ID }}
+          K4: ${{ secrets.YT_CLIENT_SECRET }}
+          K5: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os, pathlib
+          claves = [os.environ.get(f"K{i}", "").strip() for i in range(1, 6)]
+          claves = [c for c in claves if len(c) >= 8]
+          for raiz in ("logs", "salida"):
+              for f in pathlib.Path(raiz).rglob("*"):
+                  if f.is_file() and f.suffix in (".txt", ".log", ".json", ".md"):
+                      t = f.read_text(encoding="utf-8", errors="ignore")
+                      n = t
+                      for c in claves:
+                          n = n.replace(c, "***")
+                      if n != t:
+                          f.write_text(n, encoding="utf-8")
+                          print("Tachada una clave en", f)
+          PY
+
       - name: Guardar el vídeo y el registro (7 días)
         if: always()
         uses: actions/upload-artifact@v4
