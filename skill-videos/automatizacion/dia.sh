@@ -45,6 +45,12 @@ for R in "${RESULTADO[@]}"; do
   case "$R" in *HA\ FALLADO) FALLOS=$((FALLOS + 1));; esac
 done
 
+# El tema fijado a mano ya está usado: se borra para que mañana elija Claude.
+if [ "$PRIMERO_OK" -eq 1 ] && [ -f "$AQUI/canales/$CANAL-idea.md" ]; then
+  rm -f "$AQUI/canales/$CANAL-idea.md"
+  printf '  Tema fijado usado y borrado (%s-idea.md).\n' "$CANAL"
+fi
+
 CARPETA_PUBLICAR="$SALIDA/$CANAL/$FECHA/${HUECOS[0]}"
 PUBLICAR="$CARPETA_PUBLICAR/video.mp4"
 printf '\n'

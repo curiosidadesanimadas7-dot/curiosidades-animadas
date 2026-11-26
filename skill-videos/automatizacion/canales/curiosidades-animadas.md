@@ -17,11 +17,39 @@
 > - «Misma agua, misma llave. ¿Qué tanque se vacía primero?» (Scientia Explained)
 > - «Tu ampolla no es una quemadura: tu piel se rasgó por dentro» (1Cell1Life)
 
-## El tema de cada día: una curiosidad, de lo que sea
+## El tema de cada día: actualidad o una curiosidad que de verdad flipe
 
-**De todo tipo:** el cuerpo, la comida, el deporte, la física de casa, los animales, la tecnología
-de todos los días, el espacio, la historia, el dinero, el lenguaje… Lo que importa no es el tema,
-es que el que mira piense «anda, pues es verdad» o «no tenía ni idea».
+> **Cambio del 26/11 (Rubén):** «el de hoy es un tostón, a nadie le importa que el metal conduce más
+> que la madera». Se acabaron las curiosidades de libro de texto. Cada vídeo es una de estas dos:
+
+**1. Actualidad (la mitad de los días, o más):** una noticia de **los últimos 7 días** que le toque
+de cerca a alguien de 14 a 25 años en España, explicada con su porqué. Ejemplos del tipo:
+- una ley o norma nueva que les cambia algo (prohibir los vapers de sabores, los móviles en clase,
+  el precio del transporte, un cambio en el carnet de conducir…);
+- tecnología que usan (una función nueva de una app, por qué ha caído un servicio, la IA en algo
+  cotidiano);
+- ciencia o espacio que es noticia (un récord, una misión, un descubrimiento);
+- deporte, dinero o consumo con un «¿y esto por qué?» detrás (por qué sube algo de precio, un récord).
+
+**Cómo se busca:** con **WebSearch**. Busca noticias de España de los últimos días, elige la que más
+hablaría tu público y **comprueba cada dato en dos fuentes** (WebFetch para leerlas). Apunta en
+`guion.md` las fuentes con su fecha. Si no encuentras una buena noticia verificable, haz una
+curiosidad del tipo 2.
+
+**De actualidad, NO:** política de partidos ni opinar sobre quién tiene razón, sucesos con víctimas,
+tragedias, guerras, ni nada que haya que contar con morbo. La noticia se cuenta como es y se
+explica el porqué.
+
+**2. Curiosidades que de verdad flipan:** algo que le hace decir «¿QUÉ?» y querer mandarlo por
+WhatsApp. Le pasa a él, lo ve a diario o es tan bestia que no se lo cree.
+- **Sí** (es el TIPO de tema; si usas uno de estos, comprueba antes que es verdad): «Tu móvil sabe que te has caído antes que tú», «Por qué la Coca-Cola de cristal sabe
+  distinta», «El truco que hace que un avión no se caiga aunque falle un motor», «Por qué te da
+  sueño después de comer… y no es la comida».
+- **No (tostón):** «el metal conduce más que la madera», «por qué el cielo es azul», «cuántos huesos
+  tienes», o cualquier dato que viene en el libro de 2º de la ESO.
+
+**El test antes de elegir:** ¿alguien de 17 años lo mandaría a su grupo de amigos? Si la respuesta es
+«meh», cambia de tema.
 
 **Lo que tienen los buenos** (así están hechos los cuatro de ejemplo):
 
@@ -43,7 +71,7 @@ es que el que mira piense «anda, pues es verdad» o «no tenía ni idea».
   historial.
 - **Tiene que ser verdad y comprobable.** Si no estás seguro de una cifra, no la pongas. Apunta en
   `guion.md` de dónde sale cada dato.
-- **Elige tú el tema del día**, que no esté ya en el historial.
+- **Elige tú el tema del día**, que no esté ya en el historial. Si hay un tema fijado por Rubén (abajo, «La idea de hoy»), manda ese.
 
 ## El tono
 
@@ -75,6 +103,9 @@ día roza cualquiera de estos puntos, **cámbialo por otro** en vez de intentar 
   Ojo: el público de este canal empieza en 14 años.
 - **Estafas, fraude, malware o delitos.** Se puede contar que algo existe y cómo se protege uno;
   nunca cómo se hace.
+- **Drogas, alcohol, tabaco y vapers:** se puede contar la noticia o explicar qué hacen en el
+  cuerpo, pero nunca hacerlos atractivos: nada de sabores apetecibles en primer plano, marcas, trucos
+  para conseguirlos o personajes pasándolo bien con ellos.
 - **Copyright.** Nada de música, clips, personajes o marcas protegidas. Todo lo que sale en el vídeo
   es dibujo propio hecho con la plantilla, así que esto se cumple solo: no metas logos, ni marcas
   reconocibles, ni personajes de nadie.
@@ -92,7 +123,7 @@ En `resumen.json`, además del título y la descripción:
 - **Entre 3 y 5 hashtags**, en minúsculas, sin tildes y sin espacios.
 - **`#shorts` siempre**, porque el vídeo es vertical y corto.
 - **Uno fijo del canal:** `#curiosidades`.
-- **Dos o tres del tema exacto** del vídeo de hoy (`#cuerpohumano`, `#fisica`, `#espacio`…).
+- **Dos o tres del tema exacto** del vídeo de hoy (`#cuerpohumano`, `#fisica`, `#espacio`, `#noticias`…).
 - **Ninguno de relleno:** nada de `#viral`, `#fyp` ni `#parati`.
 
 **Cómo acaba el vídeo:** con una pregunta al que lo ve, de las que dan ganas de contestar. Que salga

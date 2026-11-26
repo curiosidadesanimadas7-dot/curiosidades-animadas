@@ -98,6 +98,7 @@ Antes de escribir código, haz una tabla en `plan.md` con una fila cada 2 a 4 se
   - En los momentos de drama o caída, inclina la cámara 3–5°. En los impactos, sacudida.
   - Como mucho, un barrido rápido por vídeo.
   - La cámara, casi siempre a la altura de los ojos.
+  - **Si el vídeo explica cómo funciona algo por dentro, la cámara entra en el objeto** y el mecanismo se ve moviéndose (zambullida rápida + fundido a un decorado «interior» montado lejos). La receta está en `automatizacion/prompt.md`, apartado «El porqué se ENSEÑA».
 - **Encuadre vertical.** En planos medios y primeros planos, la parte de arriba de la cabeza va al 28–35 % de la altura. Así la cara queda por encima de los subtítulos.
 - **Palabras clave.** Una cada 5–8 s (de 8 a 12 en todo el vídeo), de 1 a 3 palabras, con la palabra que resume la frase en amarillo.
 - **Sitios libres.**
@@ -196,14 +197,14 @@ Además, guarda la primera imagen y una tira con seis momentos del vídeo para q
 - [ ] Ningún subtítulo ni palabra clave tapa una cara, y nada queda tapado arriba.
 - [ ] Lo has visto entero en el móvil y con sonido.
 
-## Un vídeo al día, solo, a las 4:30 de la mañana (en Modal)
+## Un vídeo al día, solo, a las 4:30 de la mañana (en GitHub Actions)
 
 Los 6 pasos de arriba son los que haces tú con Claude Code. Los mismos 6 pasos corren solos todos
-los días en **Modal** (modal.com): a las 4:30 de Madrid enciende un ordenador en la nube, hace **un
-short**, lo sube a YouTube **programado** y se apaga. Tu PC no tiene que estar encendido.
+los días en **GitHub Actions** (repo público, gratis): a las 4:30 de Madrid enciende un ordenador,
+hace **un short**, lo sube a YouTube **programado** y se apaga. Tu PC no tiene que estar encendido.
 
 ```
-Modal, 4:30 Madrid → dia.sh → generar.sh → claude -p (los 6 pasos) → video.mp4 → subir.mjs
+GitHub Actions, 4:30 Madrid → dia.sh → generar.sh → claude -p (los 6 pasos) → video.mp4 → subir.mjs
 ```
 
 > **En el modo automático mandan `automatizacion/prompt.md` y el brief del canal**, no lo que dicen
@@ -212,7 +213,7 @@ Modal, 4:30 Madrid → dia.sh → generar.sh → claude -p (los 6 pasos) → vid
 
 | Archivo | Qué hace |
 |---|---|
-| `../modal/curiosidades.py` (fuera de la skill) | La app de Modal: la imagen con todo instalado, el reloj de las 4:30, el volumen con el historial y el secreto con las claves |
+| `../.github/workflows/video-del-dia.yml` (fuera de la skill) | El reloj de las 4:30: instala todo, lanza `dia.sh` con las claves y guarda el historial con un commit |
 | `automatizacion/dia.sh` | El día: hace **un** vídeo (`1-publicar/`) y lo sube **solo si salió bien** |
 | `automatizacion/generar.sh` | Un vídeo: crea la carpeta con la plantilla, junta el encargo y llama a `claude -p` (Sonnet, con permisos cerrados). Al terminar comprueba que mide 1080×1920 y lo que dura |
 | `automatizacion/voz.sh` | La voz con Gemini: hace `assets/voz.wav` y `assets/transcript.json` de una vez, así que **sustituye los puntos 2 y 3 del paso 2** |
@@ -220,7 +221,7 @@ Modal, 4:30 Madrid → dia.sh → generar.sh → claude -p (los 6 pasos) → vid
 | `automatizacion/cuando.mjs` · `horario.json` | A qué hora sale el vídeo, con el desfase de Madrid del día de salida |
 | `automatizacion/subir.mjs` · `autorizar.mjs` | La subida a YouTube, programada y con portada. `autorizar.mjs` se lanza una vez para dar permiso |
 | `automatizacion/prompt.md` | El encargo: sigue esta skill sin preguntar nada, con la voz y el largo de arriba, y deja los archivos que pide |
-| `automatizacion/canales/curiosidades-animadas.md` | El brief del canal: de qué va, el tono, cómo son los guiones y lo que no se quiere. Su `-historial.md` guarda los temas ya contados (en Modal, la copia buena está en el volumen) |
+| `automatizacion/canales/curiosidades-animadas.md` | El brief del canal: de qué va, el tono, cómo son los guiones y lo que no se quiere. Su `-historial.md` guarda los temas ya contados, y `-idea.md` (si existe) el tema fijado para el próximo vídeo |
 
 Cómo se monta, los comandos y qué hacer si algo falla: **`automatizacion/README.md`**.
 

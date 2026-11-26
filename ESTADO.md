@@ -1,7 +1,7 @@
 # Dónde va esto y cómo seguir
 
 > **Si eres Claude y acabas de llegar: lee este archivo entero antes de tocar nada.**
-> Última actualización: 26 de noviembre de 2026 (madrugada).
+> Última actualización: 26 de noviembre de 2026 (mañana).
 >
 > **Resumen:** el canal Curiosidades Animadas va solo en **GitHub Actions**, en el repo público
 > https://github.com/curiosidadesanimadas7-dot/curiosidades-animadas (gratis). El PC de Rubén no hace
@@ -36,7 +36,10 @@ El vídeo no sale a las 4:30: sale solo a su hora (por ejemplo, el miércoles a 
 | **Cómo entra Claude** | Plan Pro de Rubén, con `CLAUDE_CODE_OAUTH_TOKEN` (sale de `claude setup-token`) | No gasta créditos de API. **El límite del Pro es uno para toda la cuenta** |
 | **La voz** | Gemini `gemini-3.8-flash-tts`, voz **Charon** | Kokoro sonaba robótica y ElevenLabs costaba 22 $/mes |
 | **Largo del guion** | **160-190 palabras** | Medido: Charon va a 2,75-3,1 palabras/s |
-| **Estilo de los guiones** | Curiosidades de todo tipo con gancho en el primer segundo (cambio del 25/11) | Ver el brief `canales/curiosidades-animadas.md`, con los 4 shorts de ejemplo |
+| **Temas** | **Actualidad** (noticias de los últimos 7 días que tocan a gente de 14-25 en España) **o curiosidades que de verdad flipen**. Nada de libro de texto (cambio del 26/11) | Rubén: «el de hoy es un tostón». Claude busca y comprueba con **WebSearch/WebFetch** (permitidos en `generar.sh`) |
+| **Tema fijado a mano** | `canales/curiosidades-animadas-idea.md`: si existe, manda; `dia.sh` lo borra cuando el vídeo sale bien | Para que Rubén elija el tema de un día concreto |
+| **Animaciones** | Si explica cómo funciona algo, **la cámara entra en el objeto** y se ve el mecanismo (receta en `prompt.md`, «El porqué se ENSEÑA») | Rubén: «que el plano se meta en la gota y lo explique visualmente» |
+| **Estilo de los guiones** | Gancho en el primer segundo, como los 4 shorts de ejemplo | Ver el brief `canales/curiosidades-animadas.md` |
 | **Comas** | Pocas en el guion; **ninguna en pantalla** | `subtitulos.mjs` las quita al escribir los subtítulos |
 | **Subir a YouTube** | `privacyStatus: private` + `publishAt` | Es como funciona «Programar» |
 | **App de Google** | **Publicada** | En modo prueba el permiso caduca a los 7 días |
@@ -193,6 +196,9 @@ Lanzar un vídeo a mano: pestaña **Actions → Vídeo del día → Run workflow
 
 ## 9. Lo que queda
 
+0. **27/11:** el vídeo de los vapers de sabores (tema fijado por Rubén, con datos comprobados el 26/11
+   en `canales/curiosidades-animadas-idea.md`). Primer vídeo con temas nuevos, WebSearch y «viaje
+   dentro»: mirar que el guion engancha y que la animación explica.
 1. **26/11 por la mañana:** primer día en GitHub, **sin prueba previa** (decisión de Rubén). Mirar en
    Actions si salió, cuánto tardó, si subió el vídeo y si el commit del historial está. Si falla,
    el registro está en el artefacto.

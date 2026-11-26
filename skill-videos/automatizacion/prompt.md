@@ -52,7 +52,7 @@ Dos cosas del guion, por cómo funciona esta voz:
 ## Nadie está mirando
 
 Esto lo ha disparado un reloj a las 4:30 de la mañana, así que **no preguntes nada y no te pares a
-esperar respuesta**. Cuando dudes entre dos opciones razonables, elige la que mejor cumpla la skill
+esperar respuesta**. Para buscar noticias y comprobar datos tienes **WebSearch** y **WebFetch** (mira el brief). Cuando dudes entre dos opciones razonables, elige la que mejor cumpla la skill
 y sigue. Si algo se rompe de verdad, arréglalo e inténtalo otra vez; si después de tres intentos
 sigue roto, para y di claramente en el último mensaje qué ha fallado.
 
@@ -72,6 +72,34 @@ sigue roto, para y di claramente en el último mensaje qué ha fallado.
   uses en el vídeo.
 - **El tema sale del brief del canal** que viene más abajo, y **no puede repetir** ninguno de los
   temas del historial.
+
+## El porqué se ENSEÑA, no se cuenta (cambio del 26/11)
+
+Rubén: «si hablas de una gota de agua y explicas de qué está hecha, que el plano se meta en la gota y
+lo explique visualmente». Cuando el vídeo explica **cómo funciona algo por dentro**, la cámara
+**entra** en el objeto y se ve el mecanismo. Nada de un personaje quieto mientras la voz lo cuenta.
+
+**Al menos un «viaje dentro» por vídeo** (si el tema lo permite), hecho así en `escena.js`:
+
+1. **Fuera:** el objeto grande en el mundo normal (la gota, el vaper, el móvil, la piel…), con la
+   cámara acercándose despacio (`empuje` 6-8).
+2. **La zambullida (0,6-1 s):** un plano con `empuje` 18-25 que va directo al objeto hasta que
+   llena la pantalla. Ajusta `pos` muy cerca de su superficie al final.
+3. **El corte a lo pequeño:** en el instante en que el objeto llena la pantalla, `corte: 'fundido'`
+   (o `mundo.destellos.push(t)`) a un **segundo decorado montado lejos** (por ejemplo en x = 400),
+   del mismo color que el objeto: es «el interior». Así parece un único zoom continuo.
+4. **Dentro:** el mecanismo con formas simples, grandes y de colores planos, con tinta
+   (`mundo.pintura` + `mundo.marcar`): moléculas como bolas unidas por palos, iones con «+» y «−»,
+   gotitas de vapor con puntitos dentro, engranajes, flechas que se mueven. **Lo que dice la voz se
+   ve moviéndose en ese momento** (`mundo.animar`): si la voz dice «los iones llevan la corriente»,
+   los iones viajan de un lado a otro justo ahí.
+5. **Salir (opcional):** el camino inverso (alejarse rápido + fundido) para volver al personaje y su
+   reacción.
+
+Más trucos que explican sin palabras: cortar un objeto por la mitad para ver su interior, ponerlo
+transparente o en rayos X (`mundo.pintura` con un color claro y piezas internas de color fuerte),
+tamaños comparados (el personaje al lado de algo gigante), y flechas que siguen el recorrido.
+**Antes de renderizar, mira los snapshots del viaje dentro:** que se entienda sin sonido.
 
 ## Cómo ir más rápido (aquí no hay tarjeta gráfica)
 

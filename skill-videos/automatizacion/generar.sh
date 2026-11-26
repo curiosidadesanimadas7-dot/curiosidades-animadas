@@ -32,6 +32,9 @@ MODELO="${CLAUDE_MODEL:-claude-sonnet-5-5}"
 VUELTAS="${MAX_TURNS:-300}"
 MODO_PERMISOS="${MODO_PERMISOS:-acceptEdits}"
 IDEA="${IDEA:-}"
+# El tema que deja fijado Rubén para el próximo vídeo (dia.sh lo borra cuando sale bien).
+IDEA_FIJA="$AQUI/canales/$CANAL-idea.md"
+if [ -z "$IDEA" ] && [ -s "$IDEA_FIJA" ]; then IDEA="$(cat "$IDEA_FIJA")"; fi
 
 aviso() { printf '\n==> %s\n' "$1"; }
 morir() { printf '\nERROR: %s\n' "$1" >&2; exit 1; }
@@ -126,6 +129,8 @@ PERMISOS=(
   "Bash(node:*)"
   "Bash(ffprobe:*)" "Bash(ffmpeg:*)"
   "Bash(GANCHO=*)" "Bash(CLAVE=*)" "Bash(SEGUNDO=*)" "Bash(RECORTE_Y=*)"
+  # Para buscar la noticia del día y comprobar cada dato (desde el 26/11).
+  "WebSearch" "WebFetch"
 )
 SKILL_INSTALADA="$HOME/.claude/skills/skill-videos"
 # En Modal canales/ es un enlace al volumen (/__modal/volumes/...): Claude solo deja

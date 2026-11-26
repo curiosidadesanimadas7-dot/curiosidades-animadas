@@ -1,44 +1,46 @@
-# El vídeo de las 4:30 de la mañana, solo (en Modal)
+# El vídeo de las 4:30 de la mañana, solo (en GitHub Actions)
 
-Cada día a las **4:30 de Madrid**, Modal (modal.com) enciende un ordenador en la nube, hace **un
-short**, lo sube a YouTube **programado** y se apaga. El PC no tiene que estar encendido.
+Cada día a las **4:30 de Madrid** (a veces hasta una hora tarde: GitHub retrasa los relojes cuando va
+cargado), GitHub Actions enciende un ordenador, hace **un short**, lo sube a YouTube **programado** y
+se apaga. El PC no tiene que estar encendido. Repo público (minutos gratis):
+https://github.com/curiosidadesanimadas7-dot/curiosidades-animadas
 
 ```
-Modal, 4:30 Madrid → video_del_dia()   (modal/curiosidades.py, en la raíz del proyecto)
+GitHub Actions, 4:30 Madrid → .github/workflows/video-del-dia.yml
  └── dia.sh <canal>
-      ├── generar.sh "1-publicar" → carpeta + encargo (prompt.md + brief) → claude -p (Sonnet)
+      ├── generar.sh "1-publicar" → carpeta + encargo (prompt.md + brief + idea fijada) → claude -p (Sonnet)
       │     └── los 6 pasos de la skill: guion → voz.sh → plan → escena → render → portada.sh
       └── si salió bien: subir.mjs → cuando.mjs (la hora) → YouTube, privado y programado
 ```
 
-> Antes se probó con GitHub Actions y con una tarea de Windows. **Las dos están retiradas y borradas.**
+> Antes se usó Modal (`modal/curiosidades.py`). **Está parado** desde el 26/11 y no hay que
+> volver a encenderlo: saldrían dos vídeos.
 
-## Dónde vive cada cosa en Modal
+## Dónde vive cada cosa
 
 | Qué | Dónde |
 |---|---|
-| La app y el reloj de las 4:30 | `modal/curiosidades.py` → app `curiosidades-animadas` |
-| Las claves | Secreto `curiosidades`: `CLAUDE_CODE_OAUTH_TOKEN`, `GEMINI_API_KEY`, `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` |
-| El historial de temas y las horas ya cogidas | Volumen `curiosidades-datos`, en `canales/` (la copia buena; la de esta carpeta es vieja) |
-| Los vídeos | Volumen, en `salida/<canal>/<fecha>/1-publicar/` |
-| El registro de cada día | Volumen, en `logs/dia-AAAA-MM-DD-HHMM.txt` |
+| El reloj y los pasos | `.github/workflows/video-del-dia.yml` (dos crons UTC; el primer paso deja pasar solo el de las 4:30 de Madrid) |
+| Las claves | Secretos del repo (Settings → Secrets and variables → Actions): `CLAUDE_CODE_OAUTH_TOKEN`, `GEMINI_API_KEY`, `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`. Nadie puede leerlas, ni el dueño |
+| El historial de temas y las horas ya cogidas | `canales/` en el repo: GitHub hace un commit cada día |
+| **El tema del próximo vídeo, fijado a mano** | `canales/<canal>-idea.md`. Si existe, manda sobre el brief; se borra solo cuando el vídeo sale bien |
+| Los vídeos y el registro del día | Pestaña **Actions** → la ejecución del día → artefacto `video-…` (7 días). Las claves salen tachadas |
 
 Claude entra con el **plan Pro** (`CLAUDE_CODE_OAUTH_TOKEN`, sale de `claude setup-token`), no con
 clave de API. El límite del Pro es uno para toda la cuenta: si se acaba a mitad de vídeo, ese día
-no se sube nada.
+no se sube nada. **Claude no recibe nunca las claves de YouTube** (`dia.sh` se las quita).
 
-## Comandos (desde `skill-videos-github/`)
+## Cómo se usa (desde `skill-videos-github/`)
 
 ```sh
-python -m modal deploy modal/curiosidades.py          # tras CUALQUIER cambio en la skill
-python -m modal run --detach modal/curiosidades.py    # un vídeo ahora (se sube de verdad)
-python -m modal run --detach modal/curiosidades.py --idea "por qué bostezamos"
-python -m modal volume get curiosidades-datos logs/dia-2026-11-26-0430.txt .
+git pull                                   # siempre antes de cambiar nada (GitHub hace commits)
+git add -A; git commit -m "..."; git push  # tras CUALQUIER cambio: el siguiente vídeo ya lo usa
 ```
 
-**Si cambias algo y no haces `deploy`, Modal sigue con lo viejo.**
-
-Para hacer un vídeo sin subirlo, lanza `dia.sh` con `SIN_SUBIR=1`.
+- **Un vídeo ahora, a mano:** Actions → «Vídeo del día» → **Run workflow** (con una idea opcional).
+  Se sube de verdad.
+- **Fijar el tema de mañana:** escribe `canales/curiosidades-animadas-idea.md` y haz push.
+- Para hacer un vídeo sin subirlo (en un PC): `SIN_SUBIR=1 bash dia.sh <canal>`.
 
 ## Claude trabaja con permisos cerrados
 
@@ -193,8 +195,7 @@ en minúsculas, sin tildes ni eñes, con `#shorts` siempre y ninguno de relleno 
 
 ## Lo que cuesta
 
-- **Modal:** ~87 min con 8 núcleos por vídeo ≈ **0,75 $** → **~22 $/mes**. Entra en los **30 $/mes
-  gratis**. Vigilarlo en modal.com → Usage.
+- **GitHub Actions:** gratis (repo público). Unas 3 h por vídeo con 4 núcleos; el tope son 6 h.
 - **Claude:** el plan Pro de Rubén (sin coste extra, pero con límite).
 - **Gemini (voz):** gratis con un vídeo al día.
 - **YouTube:** gratis. Cada subida gasta 1.600 de las 10.000 unidades diarias de la API.
@@ -216,6 +217,8 @@ pensado aparte: mira `NUEVO-CANAL.md` en la raíz del proyecto.
 | `invalid_grant` al subir | El token de YouTube está mal (tiene que empezar por `1//`) |
 | Los subtítulos salen vacíos | El motor de audio no encontró el CLI de HyperFrames. `voz.sh` lo busca solo y, si falla, transcribe aparte |
 | `transcribe` traduce al inglés | Falta `--model small --language es` |
-| No apunta el tema en el historial | Falta la ruta real del volumen en `--add-dir` (`CANALES_REAL` en `generar.sh`) |
+| No apunta el tema en el historial | Falta la ruta real en `--add-dir` (`CANALES_REAL` en `generar.sh`) |
+| El vídeo empieza tarde | Normal en GitHub: retrasa los relojes hasta ~1 h |
+| Rojo con `timeout` | Pasó de 350 min: el render fue demasiado largo |
 
-Lo que pasó cada día está en el volumen (`logs/` y `salida/…/claude.log`).
+Lo que pasó cada día está en el artefacto de Actions (`logs/` y `salida/…/claude.log`).
