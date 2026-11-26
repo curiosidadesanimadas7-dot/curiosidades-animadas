@@ -1,23 +1,25 @@
 # Dónde va esto y cómo seguir
 
 > **Si eres Claude y acabas de llegar: lee este archivo entero antes de tocar nada.**
-> Última actualización: 25 de noviembre de 2026 (noche).
+> Última actualización: 26 de noviembre de 2026 (madrugada).
 >
-> **Resumen:** el canal Curiosidades Animadas **ya funciona solo en Modal** (modal.com). El PC de
-> Rubén ya no hace nada: no hay tarea de Windows ni hibernación. Para el segundo canal, lee
+> **Resumen:** el canal Curiosidades Animadas va solo en **GitHub Actions**, en el repo público
+> https://github.com/curiosidadesanimadas7-dot/curiosidades-animadas (gratis). El PC de Rubén no hace
+> nada. **Modal está apagado** desde el 26/11 (Rubén no quiere pagarlo); `modal/` se queda de reserva. Para el segundo canal, lee
 > `NUEVO-CANAL.md`.
 
 ---
 
 ## 1. Qué hace
 
-Cada día a las **4:30 de Madrid**, Modal enciende un ordenador en la nube y:
+Cada día a las **4:30 de Madrid** (a veces unos minutos tarde), GitHub Actions enciende un ordenador y:
 
 1. Hace **un short** vertical de 55-70 s con la skill `videos-historia-ilustrada` (Claude monta el
    vídeo; Gemini pone la voz).
 2. Lo **sube a YouTube en privado y programado** a la hora de `horario.json`, con título,
    descripción, hashtags y portada. **Solo si la generación terminó bien.**
-3. Se apaga. Modal solo cobra mientras está encendido.
+3. Se apaga. Guarda el historial con un commit en el repo, y el vídeo y el registro 7 días como
+   artefacto (pestaña Actions).
 
 El vídeo no sale a las 4:30: sale solo a su hora (por ejemplo, el miércoles a las 17:30).
 
@@ -27,7 +29,8 @@ El vídeo no sale a las 4:30: sale solo a su hora (por ejemplo, el miércoles a 
 
 | Decisión | Qué se eligió | Por qué |
 |---|---|---|
-| **Dónde corre** | **Modal**, con `modal.Cron("30 4 * * *", timezone="Europe/Madrid")` | El PC no se despertaba a las 6:00 (la hora de entonces). En Modal no hace falta el PC y entra en los 30 $/mes gratis |
+| **Dónde corre** | **GitHub Actions**, repo público, `.github/workflows/video-del-dia.yml` | El PC no se despertaba. Modal entraba en lo gratis pero Rubén no quiere arriesgarse a pagar (26/11). Repo público = minutos gratis; el privado (2.000 min/mes) no llega |
+| **La hora** | Dos crons UTC (2:30 y 3:30) y el primer paso deja pasar solo el que es 4:30 en Madrid | GitHub solo entiende UTC y hay cambio de hora |
 | **Cuántos vídeos** | **Un short al día, y se sube** | Antes eran dos (uno a publicar y otro a revisar) |
 | **Modelo de Claude** | `claude-sonnet-5-5` (en `generar.sh`) | Con Opus se acabó el límite del plan Pro a mitad de vídeo |
 | **Cómo entra Claude** | Plan Pro de Rubén, con `CLAUDE_CODE_OAUTH_TOKEN` (sale de `claude setup-token`) | No gasta créditos de API. **El límite del Pro es uno para toda la cuenta** |
@@ -47,10 +50,12 @@ El vídeo no sale a las 4:30: sale solo a su hora (por ejemplo, el miércoles a 
 skill-videos-github/
 ├── ESTADO.md                 ← este archivo
 ├── NUEVO-CANAL.md            encargo para montar el segundo canal
+├── .github/workflows/video-del-dia.yml   EL RELOJ: instala todo, lanza dia.sh, guarda historial
+├── skills-extra/             las skills hyperframes y media-use (copiadas del PC)
 ├── modal/
-│   └── curiosidades.py       LA APP DE MODAL: imagen, reloj de las 4:30, volumen, secreto
+│   └── curiosidades.py       la app de Modal, APAGADA (de reserva)
 ├── paginas/                  las dos páginas web de la app de Google (ya publicadas)
-└── skill-videos/             la skill (en Modal va copiada a /root/.claude/skills/skill-videos)
+└── skill-videos/             la skill (en GitHub va enlazada en ~/.claude/skills/skill-videos)
     ├── SKILL.md              los 6 pasos. NO tocar el estilo
     ├── repasar.sh            mide el vídeo acabado
     ├── plantilla/            index.html, escena.js, subtitulos.mjs, motor/estilo3d.js
@@ -68,14 +73,14 @@ skill-videos-github/
         ├── windows/instalar-skill.ps1   solo para probar la skill en el PC, no hace falta
         └── canales/
             ├── curiosidades-animadas.md            el brief del canal
-            ├── curiosidades-animadas-historial.md  copia; la buena está en el volumen
-            └── curiosidades-animadas-programados.json  copia; la buena está en el volumen
+            ├── curiosidades-animadas-historial.md  la memoria del canal (la buena está en GitHub)
+            └── curiosidades-animadas-programados.json  lo ya subido (la buena está en GitHub)
 ```
 
 **Cómo encaja:**
 
 ```
-Modal, 4:30 Madrid → video_del_dia()  (modal/curiosidades.py)
+GitHub Actions, 4:30 Madrid → video-del-dia.yml
  └── dia.sh
       ├── generar.sh "1-publicar" → claude -p (Sonnet) → los 6 pasos de la skill
       │     ├── voz.sh      → assets/voz.wav + assets/transcript.json
@@ -87,32 +92,32 @@ Modal, 4:30 Madrid → video_del_dia()  (modal/curiosidades.py)
 
 ---
 
-## 4. Lo que hay en Modal
+## 4. Lo que hay en GitHub (y lo que queda en Modal)
 
-- **Cuenta:** `curiosidadesanimadas7`. CLI en el PC: `python -m modal` (versión 1.6.4).
-- **App `curiosidades-animadas`** (desplegada; el reloj de las 4:30 está activo). Imagen Debian con
-  Node 22, hyperframes, Claude Code, Chrome, FFmpeg, whisper y las skills `hyperframes`,
-  `media-use` y `skill-videos`. 8 núcleos, 16 GB, 4 h como máximo, **sin reintentos** (cada
-  intento gasta límite de Claude).
-- **Volumen `curiosidades-datos`:**
-  - `canales/`: historial y programados, la memoria del canal. Es **la copia buena**.
-  - `salida/`: los vídeos, con su guion, plan y `claude.log`.
-  - `logs/`: el registro de cada día (`dia-AAAA-MM-DD-HHMM.txt`).
-- **Secreto `curiosidades`**, con 5 claves: `CLAUDE_CODE_OAUTH_TOKEN`, `GEMINI_API_KEY`,
-  `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`. **Lo crea Rubén**; nunca se pegan claves
-  en el chat.
+- **Repo público** `curiosidadesanimadas7-dot/curiosidades-animadas`. En el PC se sube como esa
+  cuenta (la URL del remoto lleva el usuario delante porque el PC tiene otra cuenta de GitHub guardada).
+- **5 secretos** (Settings → Secrets and variables → Actions): `CLAUDE_CODE_OAUTH_TOKEN`,
+  `GEMINI_API_KEY`, `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`. **Los pone Rubén**;
+  nunca se pegan claves en el chat.
+- **El ordenador:** `ubuntu-latest`, 4 núcleos y 16 GB. Tope de 350 min (GitHub corta a las 6 h).
+  Se espera ~2,5-3 h por vídeo (en Modal con 8 núcleos eran ~87 min). **Sin medir todavía.**
+- **Cada día:** el commit «Historial: vídeo del …» y un artefacto `video-…` con el vídeo, la portada,
+  `claude.log` y `logs/dia-….txt` (se borra a los 7 días).
+- **Ojo:** si el repo pasa 60 días sin commits, GitHub apaga el reloj. Con el commit diario no pasa.
+- **Modal:** app `curiosidades-animadas` **parada** (`modal app stop`). El volumen `curiosidades-datos`
+  y el secreto siguen ahí. Para volver: `python -m modal deploy modal/curiosidades.py` (y desactivar el
+  workflow de GitHub para que no salgan dos vídeos).
 
 ### Comandos (desde la carpeta `skill-videos-github/`)
 
 ```powershell
-python -m modal deploy modal/curiosidades.py      # después de CUALQUIER cambio en la skill o la app
-python -m modal run --detach modal/curiosidades.py   # un vídeo ahora, a mano (se sube de verdad)
-python -m modal volume get curiosidades-datos logs/dia-2026-11-26-0430.txt .   # ver un día
-python -m modal volume ls curiosidades-datos salida/curiosidades-animadas
+git add -A; git commit -m "lo que sea"; git push    # después de CUALQUIER cambio en la skill
+git pull                                             # traer el historial que apunta GitHub cada día
 ```
 
-> **Importante:** si cambias algo de `skill-videos/` y no haces `modal deploy`, Modal sigue con la
-> versión vieja.
+Lanzar un vídeo a mano: pestaña **Actions → Vídeo del día → Run workflow** (se sube de verdad).
+
+> **Importante:** haz `git pull` antes de cambiar nada: GitHub hace un commit cada día.
 
 ---
 
@@ -121,11 +126,11 @@ python -m modal volume ls curiosidades-datos salida/curiosidades-animadas
 - **25/11, prueba completa en Modal:** de 18:43 a 20:10 (~87 min). Salió «Tus dedos no se arrugan
   por el agua: lo hace tu cerebro», 60,6 s, 1080×1920 a 60 fps. `check` y `repasar.sh` sin errores,
   subtítulos sin comas y portada bien. Subido y programado: https://youtu.be/pBlZFNCCskY.
-- **Coste:** ~0,75 $ por vídeo, **~22 $/mes** de los 30 $ gratis de Modal (estimado; vigilarlo).
+- **Coste en Modal:** ~0,75 $ por vídeo (~22 $/mes). En GitHub, repo público: 0 $.
 - Lo de siempre: la hora de salida con los cambios de hora, el permiso de YouTube (solo
   `youtube.upload`) y que los hashtags se validen.
 
-**Sin probar todavía:** el arreglo del historial (ver el apartado 6, fallo 10). Se verá el 26/11.
+**Sin probar todavía:** todo lo de GitHub Actions. Se verá el 26/11.
 
 ---
 
@@ -188,10 +193,9 @@ python -m modal volume ls curiosidades-datos salida/curiosidades-animadas
 
 ## 9. Lo que queda
 
-1. **26/11 por la mañana:** comprobar que el reloj de las 4:30 hizo y subió el vídeo
-   (`logs/dia-2026-11-26-0430.txt` en el volumen) y que **esta vez sí apuntó la línea en el
-   historial**.
+1. **26/11 por la mañana:** primer día en GitHub, **sin prueba previa** (decisión de Rubén). Mirar en
+   Actions si salió, cuánto tardó, si subió el vídeo y si el commit del historial está. Si falla,
+   el registro está en el artefacto.
 2. Rubén: revisar o quitar en YouTube Studio el vídeo subido sin revisar, `k3g3Q1TutkY`.
-3. Vigilar el gasto de Modal el primer mes (estimado ~22 $/mes de 30).
-4. **Segundo canal** (vídeos largos de 10-15 min con imágenes fijas): todo en `NUEVO-CANAL.md`. Se
+3. **Segundo canal** (vídeos largos de 10-15 min con imágenes fijas): todo en `NUEVO-CANAL.md`. Se
    hace en otra conversación y no toca nada de este canal.
