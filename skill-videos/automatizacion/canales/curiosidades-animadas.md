@@ -103,6 +103,57 @@ Reglas encima de la tabla:
   `guion.md` de dónde sale cada dato.
 - **Elige tú el tema del día**, que no esté ya en el historial. Si hay un tema fijado por Rubén (abajo, «La idea de hoy»), manda ese.
 
+## Tres formas de contarlo (cambio del 26/11: los ejemplos de Rubén)
+
+Rubén quiere los guiones como estos tres shorts (**millones de visitas cada uno**). Son para ver **cómo están escritos**: no copies sus temas, sus personajes ni sus frases.
+Elige cada día la forma que mejor le va al tema, y mézclala con lo de arriba (gancho, números,
+el porqué paso a paso).
+
+### A. La historia real contada como un thriller → para **historia** (y noticias con historia detrás)
+Ejemplo: «¿Por qué Hitler premió al espía español que lo engañó?» (Comandante Porqué, 2,3 M).
+- **Arranca con la paradoja entera en una frase:** «Este español recibió una medalla de Hitler y otra
+  del rey de Inglaterra por la misma mentira.» El que mira ya quiere saber cómo.
+- **En presente, frases de 5 a 12 palabras, y cada frase es un paso nuevo**: «Le rechazan tres
+  veces. Así que se hace espía de los nazis… para mentirles.» Nada de contexto que no empuje.
+- **La cosa va a más:** cada giro es más gordo que el anterior (inventa informes → inventa 27 espías
+  → engaña a Hitler el día D → finge su propia muerte).
+- **Números y fechas concretos** (1941, 27 espías, 21 divisiones, 35 años después).
+- **Remate con una frase que lo resume y da la vuelta:** «El hombre que se inventó 27 espías también
+  se inventó su propia muerte.» Y la pregunta («¿Héroe o mentiroso profesional?») va en la descripción.
+- Las fuentes, al final de la descripción.
+
+### B. Una mini-historia con personajes que demuestra la curiosidad → para **curiosidades, ciencia, videojuegos**
+Ejemplo: «Why They Put Tires on a Train» (Timeless moments, 6,8 M).
+- **Un protagonista con un plan loco y algo en juego:** le quita las ruedas de acero al tren, le pone
+  neumáticos y **se juega el trabajo** a que nadie se despierta.
+- **Un rival y obstáculos con humor**, y **cada obstáculo enseña un dato real**: pincha una rueda →
+  un aro de madera por dentro la aguanta (real); hay que frenar de golpe → la goma agarra tres veces
+  más que el acero, como unas zapatillas frente a unos calcetines en el suelo encerado (real).
+- **El clímax lo resuelve la ciencia**, y el rival pierde por no saberla.
+- **Encaja perfecto con nuestro estilo**: personajes 3D, caras exageradas, acción en cada frase.
+- **Lo inventado se dice:** los personajes y la apuesta pueden ser inventados, **los datos nunca**.
+  En la descripción, siempre: «La historia real: …» con los datos y «Inventado para la historia: …»
+  (los personajes, la apuesta…).
+
+### C. La explicación directa que te toca a ti → para **actualidad, tecnología, cuerpo, dinero**
+Ejemplo: «¿Tu contraseña es de 8 letras? Un hacker la rompe en segundos» (rjavie, 2 M).
+- **Pregunta que le afecta + respuesta que asusta en la misma frase:** «¿Cuánto tarda un hacker en
+  adivinar tu contraseña? Si tiene ocho letras, menos de lo que tardas en leer esta frase.»
+- **Lo contrario de lo que cree:** «Una frase larga y tonta le aguanta siglos.»
+- **El mecanismo, en cristiano:** «No adivina: prueba. Con la tarjeta gráfica de los videojuegos.»
+- **Números gigantes que se pueden imaginar**, comparados con algo conocido («más de 40.000 años:
+  casi 10 veces lo que llevan en pie las pirámides»).
+- **Desmonta el truco que todos creen que funciona** («cambiar una A por una @ no le engaña»).
+- **Remate en una frase con las dos caras:** «La contraseña rara que nunca recuerdas cae enseguida, y
+  la frase tonta que no olvidas no la rompe nadie.»
+
+**Lo que tienen las tres:** ninguna presenta nada, todas van en presente o hablándote a ti, cada
+frase añade algo, hay números concretos y todas acaban con **una frase-remate que se podría poner en
+el título**. Ese remate es también lo que cierra el bucle con la primera frase.
+
+**En `guion.md`, apunta qué forma (A, B o C) has usado** y por qué, para poder ver después en
+YouTube Studio cuál funciona mejor.
+
 ## El tono
 
 - **Narrador de documental, pero para el móvil:** cercano, con un poco de sorna cuando toca, como
@@ -139,7 +190,8 @@ día roza cualquiera de estos puntos, **cámbialo por otro** en vez de intentar 
 - **Copyright.** Nada de música, clips, personajes o marcas protegidas. Todo lo que sale en el vídeo
   es dibujo propio hecho con la plantilla, así que esto se cumple solo: no metas logos, ni marcas
   reconocibles, ni personajes de nadie.
-- **Datos inventados.** Si no estás seguro de una cifra, no la pongas. Un vídeo de curiosidades que
+- **Datos inventados.** Si no estás seguro de una cifra, no la pongas. (En la forma B, los
+  personajes y la apuesta pueden ser inventados, y se dice en la descripción; los datos, nunca.) Un vídeo de curiosidades que
   miente se queda sin canal.
 
 ## Para subirlo
