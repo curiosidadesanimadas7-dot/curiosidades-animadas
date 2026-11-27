@@ -172,20 +172,11 @@ const video = await sub.json();
 console.log(`  Subido: https://youtu.be/${video.id}`);
 
 // ── La portada ───────────────────────────────────────────────────────────────
-if (existsSync(PORTADA)) {
-  const p = await fetch(`https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=${video.id}`, {
-    method: "POST",
-    headers: { ...AUT, "Content-Type": "image/jpeg", "Content-Length": String(statSync(PORTADA).size) },
-    body: createReadStream(PORTADA),
-    duplex: "half",
-  });
-  if (p.ok) console.log("  Portada puesta.");
-  else {
-    const t = await p.text();
-    console.warn(`  AVISO: la portada no se ha podido poner (${p.status}). El vídeo está bien igualmente.`);
-    if (/unauthorized|forbidden/i.test(t)) console.warn("  Suele ser que el canal no está verificado: youtube.com/verify");
-  }
-}
+// En los Shorts, YouTube solo se queda con la portada si se manda DESPUÉS de que
+// termine de procesar el vídeo (lo dice la documentación de thumbnails.set). Antes
+// respondía 200 («Portada puesta») pero el Short salía sin ella (26 y 27/11).
+// Así que primero se espera a processingStatus = succeeded (hasta 30 min).
+if (existsSync(PORTADA)) await ponerPortada(video.id);
 
 // ── Apuntar el hueco, para que mañana no se pise ─────────────────────────────
 let ledger = [];
@@ -196,3 +187,45 @@ writeFileSync(LEDGER, JSON.stringify(ledger, null, 2) + "\n");
 
 console.log(`\n  Listo. Sale solo el ${cuando.dia} a las ${cuando.hora_madrid}.`);
 console.log(`  Hasta entonces está privado: https://studio.youtube.com/video/${video.id}/edit\n`);
+
+async function esperarProcesado(id, maxMin = 30) {
+  const hasta = Date.now() + maxMin * 60000;
+  let ultimo = "";
+  while (Date.now() < hasta) {
+    const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=processingDetails,status&id=${id}`, { headers: AUT });
+    const d = await r.json().catch(() => ({}));
+    if (d.error) {
+      // El permiso del canal es solo youtube.upload: no deja LEER el estado del vídeo
+      // (403 insufficientPermissions). Entonces se espera un tiempo fijo: un Short de
+      // un minuto suele estar procesado en menos de 10.
+      console.log(`  No puedo ver si YouTube ha terminado (${d.error.code}); espero 12 min fijos.`);
+      await new Promise((ok) => setTimeout(ok, 12 * 60000));
+      return true;
+    }
+    const est = d.items?.[0]?.processingDetails?.processingStatus || d.items?.[0]?.status?.uploadStatus || "?";
+    if (est !== ultimo) { console.log(`  Procesando en YouTube: ${est}`); ultimo = est; }
+    if (est === "succeeded" || est === "processed") return true;
+    if (est === "failed" || est === "rejected" || est === "deleted") return false;
+    await new Promise((ok) => setTimeout(ok, 20000));
+  }
+  return false;
+}
+
+async function ponerPortada(id) {
+  const listo = await esperarProcesado(id);
+  if (!listo) console.warn("  AVISO: YouTube no ha terminado de procesar en 30 min. Pruebo a poner la portada igualmente.");
+  for (let intento = 1; intento <= 3; intento++) {
+    const p = await fetch(`https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=${id}`, {
+      method: "POST",
+      headers: { ...AUT, "Content-Type": "image/jpeg", "Content-Length": String(statSync(PORTADA).size) },
+      body: createReadStream(PORTADA),
+      duplex: "half",
+    });
+    if (p.ok) { console.log("  Portada puesta (con el vídeo ya procesado)."); return; }
+    const t = await p.text();
+    console.warn(`  AVISO: la portada no se ha podido poner (${p.status}, intento ${intento}).`);
+    if (/unauthorized|forbidden/i.test(t)) { console.warn("  Suele ser que el canal no está verificado: youtube.com/verify"); return; }
+    await new Promise((ok) => setTimeout(ok, 30000));
+  }
+  console.warn("  El vídeo está bien igualmente; la portada se puede poner a mano en YouTube Studio.");
+}
