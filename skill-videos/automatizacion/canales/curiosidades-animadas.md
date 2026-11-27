@@ -142,6 +142,26 @@ Ejemplo: «Why They Put Tires on a Train» (Timeless moments, 6,8 M).
   En la descripción, siempre: «La historia real: …» con los datos y «Inventado para la historia: …»
   (los personajes, la apuesta…).
 
+**La forma B va en 5 actos** (cambio del 27/11; los segundos son orientativos para ~60 s):
+
+1. **El gancho chocante + un dato hiperconcreto (0-10 s).** Una acción rara o al revés de lo
+   normal en los 3 primeros segundos, y enseguida una cifra o medida exacta que le da credibilidad
+   (corte a plano SIN personajes con ese dato: la nota, el objeto, la báscula).
+2. **La burla + la regla misteriosa (10-21 s).** Otros personajes se ríen o no se lo creen. Aparece
+   una regla rara con un límite («solo funciona si…», «tiene 2 minutos») → plano del cronómetro o
+   de lo que lo controla.
+3. **La prueba extrema y el resultado absurdo (22-36 s).** Se prueba con el caso más bestia (el más
+   grande, el más escéptico) y pasa algo que parece imposible, enseñado con una comparación directa
+   (el gigante pierde en 2 segundos contra el pequeño).
+4. **A lo grande… y el error humano (37-51 s).** Se extiende a todo el país o el mundo (plano
+   aéreo) y entonces alguien mete la pata: «Hasta que un día alguien…».
+5. **El caos, el porqué en una frase y el cierre en bucle (52-64 s).** La consecuencia, rápida; el
+   porqué real explicado en UNA frase sencilla; y el remate repite la regla o la frase del
+   principio (así enlaza con el bucle).
+
+**En historia real (A) o noticias (C) NO se fuerzan los 5 actos:** solo se usan si los hechos
+reales ya van así. Nunca te inventes una burla, una prueba ni un error que no pasó.
+
 ### C. La explicación directa que te toca a ti → para **noticias tochas, tecnología, cuerpo, dinero**
 Ejemplo: «¿Tu contraseña es de 8 letras? Un hacker la rompe en segundos» (rjavie, 2 M).
 - **Pregunta que le afecta + respuesta que asusta en la misma frase:** «¿Cuánto tarda un hacker en

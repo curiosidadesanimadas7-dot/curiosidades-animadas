@@ -77,6 +77,17 @@ sigue roto, para y di claramente en el último mensaje qué ha fallado.
 - **El tema sale del brief del canal** que viene más abajo, y **no puede repetir** ninguno de los
   temas del historial.
 
+## El montaje que retiene (cambio del 27/11)
+
+Lo detalla la skill en los pasos 3 y 4; lo importante, resumido:
+- **18-24 planos en un minuto, ninguno quieto.** Acercarse, barrido, meterse dentro o plano aéreo.
+- **Cuando la voz nombra un objeto, una cifra o un sitio → plano de ese objeto SIN personajes.**
+- **Exageraciones visuales** que refuerzan lo que se dice (el suelo que se agrieta, el gigante tejiendo).
+- **Todo de colores vivos y lo importante en un color chillón**; rayos de luz si hay ventanas.
+- **Efectos de sonido** con `sfx.json` + `node sfx.mjs`: whoosh en los cortes, golpe en los impactos,
+  pop en lo que aparece, tictac en las esperas. Por debajo de la voz.
+- En `plan.md`, la columna **Tipo** (CON PERSONAJES / SOLO OBJETO) y la columna **Sonido**.
+
 ## El principio y el final (lo que más cuenta en YouTube)
 
 - **Fotograma 0:** ya se mueve y ya engancha. La primera frase, 5 palabras como mucho. Antes de
@@ -134,6 +145,7 @@ El render va con el procesador, así que cada fotograma cuesta. Para no gastar e
 | `assets/transcript.json` | El segundo de cada palabra (lo pone `voz.sh` también) |
 | `plan.md` | La tabla del paso 3, con los segundos de la transcripción |
 | `escena.js` e `index.html` | El vídeo montado |
+| `sfx.json` | Los efectos de sonido (los mete `node sfx.mjs`) |
 | `video.mp4` | **El vídeo, 1080×1920 a 60 fps, entre 55 y 70 s** |
 | `portada.jpg` | La portada, 1080×1920 en vertical (mira abajo) |
 | `resumen.json` | Lo que necesita YouTube (mira abajo). **Es un JSON, no un texto suelto:** lo lee un script |

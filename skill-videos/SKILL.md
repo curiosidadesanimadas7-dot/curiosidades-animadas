@@ -81,24 +81,28 @@ Guárdalo como `guion.md`, con el texto que va a decir la voz.
 
 ### 3. Plan
 
-Antes de escribir código, haz una tabla en `plan.md` con una fila cada 2 a 4 segundos:
+Antes de escribir código, haz una tabla en `plan.md` con **una fila por plano: de 18 a 24 planos en un minuto** (cada 2 a 3,5 s):
 
-| Segundo | Lo que dice la voz | Plano y cámara | Lo que pasa | Luz | Palabra clave |
-|---|---|---|---|---|---|
-| 0,0 | Este panadero tiene una máquina… | General de la calle, acercándose despacio | El panadero, con los brazos en jarras, junto a la máquina que amasa | día | AMASA *SOLA* |
-| 1,6 | … | Corte a plano medio, inclinado 4°, flash blanco | … | día | — |
+| Segundo | Lo que dice la voz | Tipo | Plano y movimiento | Lo que pasa | Luz | Palabra clave | Sonido |
+|---|---|---|---|---|---|---|---|
+| 0,0 | Este panadero tiene una máquina… | CON PERSONAJES | General de la calle → acercándose | El panadero, en jarras, junto a la máquina | día | AMASA *SOLA* | whoosh |
+| 1,6 | … 300 gramos de harina… | SOLO OBJETO | Detalle cenital de la báscula → acercándose | La aguja sube hasta 300 | día | — | pop |
 
 - **Usa los segundos de la transcripción,** no los que te imaginas.
 - **En el primer fotograma ya se ve todo:** el sitio, el personaje y de qué va. Nada de empezar en negro.
 - **Cámara, como en los shorts del estilo:**
-  - Planos de 2 a 4 s, y en todos la cámara se acerca despacio. En la palabra más fuerte de la frase, se acerca rápido durante un segundo.
+  - **Planos de 2 a 3,5 s (18-24 en un minuto), y ninguno quieto.** Cada plano lleva uno de estos movimientos: acercarse despacio (lo normal), barrido rápido para descubrir algo, **meterse dentro** de algo (una puerta, una pantalla, el objeto) hasta que es el siguiente decorado, o **plano aéreo** moviéndose para enseñar escala (una ciudad, una carretera, el mapa). En la palabra más fuerte de la frase, se acerca rápido durante un segundo.
   - Dentro del mismo sitio, de un plano a otro se pasa deslizando la cámara (0,6–1,3 s), no cortando. Solo si el salto es pequeño (como mucho media pantalla y un 40 % más cerca o más lejos).
   - Corte en los saltos grandes. Al cambiar de sitio o de luz, fundido de 0,25 s.
   - Flash blanco justo después de la primera frase.
   - En los momentos de drama o caída, inclina la cámara 3–5°. En los impactos, sacudida.
-  - Como mucho, un barrido rápido por vídeo.
+  - Barridos rápidos, los que pida la historia para descubrir algo (no en cada plano: marean).
   - La cámara, casi siempre a la altura de los ojos.
   - **Si el vídeo explica cómo funciona algo por dentro, la cámara entra en el objeto** y el mecanismo se ve moviéndose (zambullida rápida + fundido a un decorado «interior» montado lejos). La receta está en `automatizacion/prompt.md`, apartado «El porqué se ENSEÑA».
+- **Planos SIN personajes cuando la voz nombra algo concreto** (cambio del 27/11): un objeto, una cifra, un documento, un sitio nuevo o un paso técnico que no está en el plano → **corte a un plano detalle o general sin personas**: el cronómetro avanzando, la nota en la pared con el dato escrito (`mundo.cartel`), la báscula vista desde arriba, el edificio desde el cielo, el objeto doblándose o rompiéndose. Entre un tercio y la mitad de los planos son así.
+- **Exageraciones visuales** que refuerzan lo que dice la voz: alguien muy fuerte entra y el suelo se agrieta bajo sus pies (líneas rojas con `mundo.efecto('impacto')` y grietas de formas finas); alguien que se vuelve inofensivo haciendo algo ridículamente tranquilo (un gigante tejiendo una bufanda); alguien que pierde la paciencia pasa de calma a furia en un corte, con sacudida (`mundo.golpes`).
+- **Color: todo vivo, y lo importante MÁS vivo.** Nada de grises ni de escenas apagadas. El decorado, en colores vivos pero algo más suaves (azules, verdes, arenas), y **el protagonista o el objeto del que se habla, en un color chillón** que no se repite en el resto del plano (rosa chicle, rojo intenso, amarillo eléctrico). Que el ojo vaya solo a él.
+- **Rayos de luz** cuando haya una ventana, una rejilla o una puerta abierta: un cono o un prisma alargado, blanco-amarillento y muy transparente (`MeshBasicMaterial` con `transparent: true`, `opacity` 0,12-0,2, `depthWrite: false`), sin `mundo.marcar` (los rayos no llevan tinta). El motor no se toca.
 - **Encuadre vertical.** En planos medios y primeros planos, la parte de arriba de la cabeza va al 28–35 % de la altura. Así la cara queda por encima de los subtítulos.
 - **Palabras clave.** Una cada 5–8 s (de 8 a 12 en todo el vídeo), de 1 a 3 palabras, con la palabra que resume la frase en amarillo.
 - **Sitios libres.**
@@ -117,7 +121,10 @@ Pídele a Claude que monte el plan siguiendo la skill `hyperframes` y esta plant
 | `motor/estilo3d.js` | El estilo: luz, tinta, personajes, cámara y color | No |
 
 1. **Duración y voz.** En `index.html`, pon en el `#root` `data-duration` = la voz + 1. Quita el comentario al `<audio id="voz">` y pon su `data-duration` = lo que dura la voz.
-2. **Subtítulos.** Ejecuta `node subtitulos.mjs`. Lee `assets/transcript.json` y escribe los subtítulos entre las marcas `SUBTITULOS`. Si `guion.txt` tiene las mismas palabras, usa su ortografía. Si avisa de que no coinciden, revisa a mano las tildes y los nombres.
+2. **Subtítulos.** Ejecuta `node subtitulos.mjs` (salen de 1 a 3 palabras, al golpe de la voz). Lee `assets/transcript.json` y escribe los subtítulos entre las marcas `SUBTITULOS`. Si `guion.txt` tiene las mismas palabras, usa su ortografía. Si avisa de que no coinciden, revisa a mano las tildes y los nombres.
+   **Efectos de sonido.** Escribe `sfx.json` con un efecto en cada momento que lo pida y ejecuta `node sfx.mjs`, que copia los sonidos y los mete en `index.html` (entre las marcas `SFX`, por debajo de la voz). Lista de efectos y formato al principio de `sfx.mjs`. Cómo ponerlos:
+   - `whoosh` o `whoosh-short` en cada corte con movimiento, barrido o zambullida; `impact-bass-1` en los golpes, las sacudidas y las revelaciones fuertes; `pop` cuando aparece algo o salta una palabra clave importante; `tictac` con un cronómetro o una espera; `sparkle` en un «¡anda!»; `error` en lo que sale mal; `riser` 10 s antes del clímax.
+   - **Entre 12 y 25 efectos en un minuto.** Que acompañen, no que tapen: ninguno encima de una frase importante con más volumen que 0,4.
 3. **Palabras clave.** Pon un `<div class="clip clave">` por palabra, como los del ejemplo:
    - `data-start`: cuando la voz dice la palabra, 0,05 s antes.
    - `data-duration`: de 1 a 1,6.
@@ -235,7 +242,7 @@ Si la skill `hyperframes` dice otra cosa, aquí manda esta:
 - **Guion y plan.** Se usan los de esta skill (pasos 1 y 3), no las tres historias ni el `SPEC.md` de `hyperframes`.
 - **Personajes.** Sin estirar y encoger, sin temblor de línea y sin respiración en reposo: quietos están quietos. Solo parpadean, solos.
 - **Formato.** 1080×1920 a 60 fps.
-- **Subtítulos.** En la franja de 1318–1394 px, más abajo que la que propone `hyperframes`, y una línea de 2 a 5 palabras.
+- **Subtítulos.** En la franja de 1318–1394 px, más abajo que la que propone `hyperframes`, y de 1 a 3 palabras por golpe de voz (desde el 27/11), en blanco con borde negro grueso.
 
 ## Instalarla
 

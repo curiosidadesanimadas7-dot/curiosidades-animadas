@@ -6,14 +6,15 @@
 //
 // - Toma los tiempos de cada palabra de la transcripción.
 // - Si guion.txt tiene las mismas palabras, usa su ortografía (tildes, mayúsculas, signos).
-// - Agrupa de 2 a 5 palabras (máx. 30 letras): corta en punto, coma, pausa ≥ 0,15 s o al llenarse.
+// - Agrupa de 1 a 3 palabras (máx. 20 letras), al golpe de la voz (cambio del 27/11): corta en
+//   punto, coma, pausa ≥ 0,15 s o al llenarse.
 // - Las comas NO salen en pantalla: se quitan al escribir cada subtítulo.
 // - Un grupo a la vez, sin huecos que parpadeen. Lo reescribe entre
 //   <!-- SUBTITULOS:INICIO … --> y <!-- SUBTITULOS:FIN -->.
 import fs from "node:fs";
 
 const [html = "index.html", tr = "assets/transcript.json", guion = "guion.txt"] = process.argv.slice(2);
-const MAX_PAL = 5, MAX_LETRAS = 30, PAUSA = 0.15;
+const MAX_PAL = 3, MAX_LETRAS = 20, PAUSA = 0.15;
 const CORTAS = new Set("el la los las un una unos unas lo al del de a en y e o u que con por para sin su sus mi tu se le les me te nos no ni muy más".split(" "));
 
 function palabras(d) {
@@ -48,7 +49,7 @@ ws.forEach((w, i) => {
   if (!sig || finFrase || coma || pausa || lleno) {
     // no dejar «una», «de», «que»… colgando al final de la línea: pasan a la siguiente
     const ultima = w.text.toLowerCase().replace(/[^a-záéíóúüñ]/g, "");
-    if (lleno && !finFrase && !coma && !pausa && sig && cur.length > 2 && CORTAS.has(ultima)) {
+    if (lleno && !finFrase && !coma && !pausa && sig && cur.length > 1 && CORTAS.has(ultima)) {
       const pasa = cur.pop(); grupos.push(cur); cur = [pasa];
     } else { grupos.push(cur); cur = []; }
   }
