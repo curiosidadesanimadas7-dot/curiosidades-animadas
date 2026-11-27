@@ -7,3 +7,4 @@ No lo borres: es la memoria del canal.
 - 2026-11-24 — el móvil mojado en un bote de arroz — ¿Qué pasa si metes el móvil mojado en arroz?
 - 2026-11-25 — por qué se arrugan los dedos en el agua (lo hace el sistema nervioso) — Tus dedos no se arrugan por el agua: lo hace tu cerebro
 - 2026-11-26 — por qué el metal parece más frío que la madera aunque estén a la misma temperatura (conducción del calor) — El metal no está más frío que la madera: te roba el calor
+- 2026-11-27 — por qué España ha prohibido los vapers de sabores (real decreto del 24/11, qué lleva la nube de vapor, motivo y giro) — Te quitan el vaper de sandía: por esto lo ha prohibido España
